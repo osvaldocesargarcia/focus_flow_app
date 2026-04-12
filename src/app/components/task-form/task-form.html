@@ -1,0 +1,168 @@
+<!-- Backdrop -->
+<div
+  class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 anim-fade-up"
+  data-backdrop="true"
+  (click)="onBackdropClick($event)"
+  (keydown)="onKeydown($event)"
+  role="dialog"
+  [attr.aria-label]="isEditing() ? i18n.t().editTask : i18n.t().addTask"
+  aria-modal="true">
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-backdrop="true"></div>
+
+  <!-- Modal panel -->
+  <div
+    class="relative w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden anim-scale-in bg-card border border-white/[0.07]">
+
+    <!-- Purple accent top bar -->
+    <div class="h-1 w-full bg-gradient-to-r from-purple via-purple-lt to-cyan"></div>
+
+    <div class="p-6 sm:p-8">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold text-text font-['Space_Grotesk']">
+          {{ isEditing() ? i18n.t().editTask : i18n.t().addTask }}
+        </h2>
+        <button
+          (click)="close()"
+          class="w-8 h-8 rounded-xl flex items-center justify-center text-muted hover:text-text hover:bg-white/10 transition-all duration-150 cursor-pointer"
+          [attr.aria-label]="i18n.t().cancel">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Form -->
+      <form (ngSubmit)="submit()" class="flex flex-col gap-5" #formEl>
+
+        <!-- Title -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-sm font-medium text-muted" for="task-title">
+            {{ i18n.t().titleLabel }} <span class="text-rose" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="task-title"
+            type="text"
+            [placeholder]="i18n.t().titlePlaceholder"
+            [ngModel]="title()"
+            (ngModelChange)="title.set($event)"
+            name="title"
+            required
+            maxlength="120"
+            autocomplete="off"
+            class="w-full px-4 py-3 rounded-2xl text-text text-sm
+                   bg-white/5 border border-white/8 placeholder-muted
+                   focus:outline-none focus:border-purple focus:bg-white/8
+                   transition-all duration-200"
+            [style.--tw-border-opacity]="1">
+        </div>
+
+        <!-- Description -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-sm font-medium text-muted" for="task-desc">
+            {{ i18n.t().descLabel }}
+          </label>
+          <textarea
+            id="task-desc"
+            rows="3"
+            [placeholder]="i18n.t().descPlaceholder"
+            [ngModel]="description()"
+            (ngModelChange)="description.set($event)"
+            name="description"
+            maxlength="500"
+            class="w-full px-4 py-3 rounded-2xl text-text text-sm resize-none
+                   bg-white/5 border border-white/8 placeholder-muted
+                   focus:outline-none focus:border-purple focus:bg-white/8
+                   transition-all duration-200"></textarea>
+        </div>
+
+        <!-- Priority + Status row -->
+        <div class="grid grid-cols-2 gap-4">
+
+          <!-- Priority -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-muted" for="task-priority">
+              {{ i18n.t().priorityLabel }}
+            </label>
+            <div class="relative">
+              <select
+                id="task-priority"
+                [ngModel]="priority()"
+                (ngModelChange)="priority.set($event)"
+                name="priority"
+                class="w-full px-4 py-3 rounded-2xl text-text text-sm appearance-none
+                       bg-white/5 border border-white/8
+                       focus:outline-none focus:border-purple focus:bg-white/8
+                       transition-all duration-200 cursor-pointer pr-10">
+                <option value="high"   class="bg-card text-text">{{ i18n.t().high }}</option>
+                <option value="medium" class="bg-card text-text">{{ i18n.t().medium }}</option>
+                <option value="low"    class="bg-card text-text">{{ i18n.t().low }}</option>
+              </select>
+              <!-- chevron -->
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Status -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-muted" for="task-status">
+              {{ i18n.t().statusLabel }}
+            </label>
+            <div class="relative">
+              <select
+                id="task-status"
+                [ngModel]="status()"
+                (ngModelChange)="status.set($event)"
+                name="status"
+                class="w-full px-4 py-3 rounded-2xl text-text text-sm appearance-none
+                       bg-white/5 border border-white/8
+                       focus:outline-none focus:border-purple focus:bg-white/8
+                       transition-all duration-200 cursor-pointer pr-10">
+                <option value="todo"        class="bg-card text-text">{{ i18n.t().todo }}</option>
+                <option value="in-progress" class="bg-card text-text">{{ i18n.t().inProgress }}</option>
+                <option value="done"        class="bg-card text-text">{{ i18n.t().done }}</option>
+              </select>
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-3 pt-2">
+          <button
+            type="button"
+            (click)="close()"
+            class="flex-1 py-3 rounded-2xl text-sm font-medium text-muted
+                   bg-white/5 hover:bg-white/10 border border-white/8
+                   transition-all duration-200 cursor-pointer">
+            {{ i18n.t().cancel }}
+          </button>
+          <button
+            type="submit"
+            [disabled]="!title().trim()"
+            class="flex-1 py-3 rounded-2xl text-sm font-semibold text-white
+                   bg-gradient-to-r from-purple to-purple-lt
+                   hover:from-purple-lt hover:to-cyan
+                   disabled:opacity-40 disabled:cursor-not-allowed
+                   transition-all duration-200 cursor-pointer
+                   hover:shadow-lg hover:shadow-purple/25 hover:scale-[1.02]
+                   active:scale-[0.98]">
+            {{ i18n.t().save }}
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
