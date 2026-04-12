@@ -1,0 +1,110 @@
+import { Injectable, signal, computed } from '@angular/core';
+
+export type TimerMode  = 'focus' | 'short-break' | 'long-break';
+export type TimerState = 'idle'  | 'running'     | 'paused';
+
+export const DURATIONS: Record<TimerMode, number> = {
+  'focus':       25 * 60,
+  'short-break':  5 * 60,
+  'long-break':  15 * 60,
+};
+
+@Injectable({ providedIn: 'root' })
+export class TimerService {
+  readonly mode      = signal<TimerMode>('focus');
+  readonly state     = signal<TimerState>('idle');
+  readonly timeLeft  = signal<number>(DURATIONS['focus']);
+  readonly sessions  = signal<number>(0);
+
+  /** 0 → 1 as timer counts down (0 = full ring, 1 = empty ring) */
+  readonly progress = computed(() => {
+    const total = DURATIONS[this.mode()];
+    return (total - this.timeLeft()) / total;
+  });
+
+  readonly displayTime = computed(() => {
+    const t = this.timeLeft();
+    const m = Math.floor(t / 60).toString().padStart(2, '0');
+    const s = (t % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  });
+
+  readonly isRunning  = computed(() => this.state() === 'running');
+  readonly isPaused   = computed(() => this.state() === 'paused');
+
+  /** Dots for session counter (4 per cycle) */
+  readonly sessionDots = computed(() => {
+    const n = this.sessions() % 4;
+    return Array.from({ length: 4 }, (_, i) => i < n);
+  });
+
+  private intervalId: ReturnType<typeof setInterval> | null = null;
+
+  setMode(mode: TimerMode): void {
+    this.clearTimer();
+    this.mode.set(mode);
+    this.timeLeft.set(DURATIONS[mode]);
+    this.state.set('idle');
+  }
+
+  toggle(): void {
+    this.state() === 'running' ? this.pause() : this.start();
+  }
+
+  start(): void {
+    if (this.state() === 'running') return;
+    this.state.set('running');
+    this.intervalId = setInterval(() => {
+      const t = this.timeLeft();
+      if (t <= 0) {
+        this.complete();
+        return;
+      }
+      this.timeLeft.update(v => v - 1);
+    }, 1000);
+  }
+
+  pause(): void {
+    if (this.state() !== 'running') return;
+    this.state.set('paused');
+    this.clearTimer();
+  }
+
+  reset(): void {
+    this.clearTimer();
+    this.timeLeft.set(DURATIONS[this.mode()]);
+    this.state.set('idle');
+  }
+
+  private complete(): void {
+    this.clearTimer();
+    if (this.mode() === 'focus') {
+      this.sessions.update(s => s + 1);
+    }
+    this.timeLeft.set(0);
+    this.state.set('idle');
+    this.notify();
+  }
+
+  private notify(): void {
+    if (!('Notification' in window)) return;
+    const body = this.mode() === 'focus'
+      ? 'Focus session complete! Time to rest.'
+      : 'Break over! Back to work.';
+
+    if (Notification.permission === 'granted') {
+      new Notification('FocusFlow', { body, icon: '/favicon.ico' });
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then(p => {
+        if (p === 'granted') new Notification('FocusFlow', { body, icon: '/favicon.ico' });
+      });
+    }
+  }
+
+  private clearTimer(): void {
+    if (this.intervalId !== null) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+}
