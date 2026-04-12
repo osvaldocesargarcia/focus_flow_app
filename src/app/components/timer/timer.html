@@ -1,0 +1,213 @@
+<div class="flex flex-col items-center gap-6 select-none">
+
+  <!-- ── Mode Tabs ── -->
+  <div class="flex gap-1 p-1 rounded-2xl"
+       [class]="'glass ' + (i18n.lang() === 'pt' ? 'text-xs' : 'text-sm')">
+    @for (tab of modeTabs(); track tab.key) {
+      <button
+        (click)="setMode(tab.key)"
+        [class]="[
+          'px-3 py-1.5 rounded-xl font-medium transition-all duration-200 cursor-pointer whitespace-nowrap',
+          timer.mode() === tab.key
+            ? 'bg-purple text-white shadow-lg'
+            : 'text-muted hover:text-text'
+        ].join(' ')"
+        [attr.aria-pressed]="timer.mode() === tab.key"
+        [attr.aria-label]="tab.label">
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+
+  <!-- ── SVG Progress Ring ── -->
+  <div class="relative flex items-center justify-center">
+
+    <!-- Outer decorative ring glow -->
+    <div
+      class="absolute rounded-full transition-all duration-700"
+      [class]="[
+        'w-56 h-56',
+        timer.isRunning() && timer.mode() === 'focus'
+          ? 'opacity-100 bg-purple/5 blur-xl'
+          : timer.isRunning()
+            ? 'opacity-100 bg-cyan/5 blur-xl'
+            : 'opacity-0'
+      ].join(' ')">
+    </div>
+
+    <svg
+      viewBox="0 0 220 220"
+      width="220"
+      height="220"
+      [class]="ringGlowClass()"
+      aria-hidden="true"
+      style="transition: filter 0.5s ease;">
+
+      <defs>
+        <!-- Focus gradient: purple → cyan -->
+        <linearGradient id="grad-focus" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#a855f7"/>
+          <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+        <!-- Short break: cyan → emerald -->
+        <linearGradient id="grad-short" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#06b6d4"/>
+          <stop offset="100%" stop-color="#10b981"/>
+        </linearGradient>
+        <!-- Long break: emerald → teal -->
+        <linearGradient id="grad-long" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#10b981"/>
+          <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+        <!-- Track gradient (subtle) -->
+        <linearGradient id="grad-track" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0.06)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0.03)"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Background track circle -->
+      <circle
+        cx="110" cy="110"
+        [attr.r]="R"
+        fill="none"
+        stroke="url(#grad-track)"
+        stroke-width="10"/>
+
+      <!-- Progress arc -->
+      <circle
+        cx="110" cy="110"
+        [attr.r]="R"
+        fill="none"
+        [attr.stroke]="'url(#grad-' + modeClass() + ')'"
+        stroke-width="10"
+        stroke-linecap="round"
+        [attr.stroke-dasharray]="CIRCUMFERENCE"
+        [attr.stroke-dashoffset]="dashOffset()"
+        transform="rotate(-90 110 110)"
+        style="transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.4s ease;"/>
+
+      <!-- End dot (shows at the leading edge of the arc) -->
+      @if (timer.progress() < 0.99 && timer.progress() > 0.01) {
+        <circle
+          cx="110" cy="22"
+          r="5"
+          [attr.fill]="timer.mode() === 'focus' ? '#06b6d4' : '#10b981'"
+          [attr.transform]="'rotate(' + (timer.progress() * 360 - 90) + ' 110 110)'"
+          style="transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);"/>
+      }
+    </svg>
+
+    <!-- ── Center content ── -->
+    <div class="absolute flex flex-col items-center gap-1">
+
+      <!-- Mode icon -->
+      <div class="mb-1">
+        @switch (timer.mode()) {
+          @case ('focus') {
+            <!-- Brain / focus icon -->
+            <svg class="w-6 h-6 text-purple-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/>
+            </svg>
+          }
+          @case ('short-break') {
+            <!-- Coffee icon -->
+            <svg class="w-6 h-6 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+            </svg>
+          }
+          @case ('long-break') {
+            <!-- Moon icon -->
+            <svg class="w-6 h-6 text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
+            </svg>
+          }
+        }
+      </div>
+
+      <!-- Time display -->
+      <span
+        class="font-['Space_Grotesk'] font-bold tracking-tight leading-none tabular-nums"
+        style="font-size: clamp(2.4rem, 8vw, 3.2rem);"
+        [class]="timer.isRunning() ? 'tick-pulse gradient-text' : 'text-text'">
+        {{ timer.displayTime() }}
+      </span>
+
+      <!-- Mode label -->
+      <span class="text-xs font-medium text-muted mt-0.5 tracking-widest uppercase">
+        @switch (timer.mode()) {
+          @case ('focus')       { {{ i18n.t().focus }} }
+          @case ('short-break') { {{ i18n.t().shortBreak }} }
+          @case ('long-break')  { {{ i18n.t().longBreak }} }
+        }
+      </span>
+    </div>
+  </div>
+
+  <!-- ── Controls ── -->
+  <div class="flex items-center gap-3">
+
+    <!-- Reset -->
+    <button
+      (click)="timer.reset()"
+      class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-muted hover:text-text hover:bg-white/10 transition-all duration-200 cursor-pointer"
+      [attr.aria-label]="i18n.t().reset"
+      [title]="i18n.t().reset">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+      </svg>
+    </button>
+
+    <!-- Start / Pause — main CTA -->
+    <button
+      (click)="timer.toggle()"
+      class="relative flex items-center gap-2.5 px-8 py-3.5 rounded-2xl font-semibold text-white transition-all duration-200 cursor-pointer overflow-hidden group"
+      [class]="[
+        timer.mode() === 'focus'
+          ? 'bg-gradient-to-r from-purple to-purple-lt hover:from-purple-lt hover:to-cyan'
+          : 'bg-gradient-to-r from-cyan to-emerald hover:from-emerald hover:to-cyan',
+        'shadow-lg hover:shadow-xl hover:scale-105 active:scale-100'
+      ].join(' ')"
+      [attr.aria-label]="timer.isRunning() ? i18n.t().pause : i18n.t().start">
+      <!-- Shine overlay -->
+      <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-2xl"></span>
+
+      @if (timer.isRunning()) {
+        <!-- Pause icon -->
+        <svg class="w-5 h-5 relative z-10" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25Zm7.5 0A.75.75 0 0 1 15 4.5h1.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25Z" clip-rule="evenodd"/>
+        </svg>
+        <span class="relative z-10">{{ i18n.t().pause }}</span>
+      } @else {
+        <!-- Play icon -->
+        <svg class="w-5 h-5 relative z-10" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/>
+        </svg>
+        <span class="relative z-10">{{ timer.isPaused() ? i18n.t().start : i18n.t().start }}</span>
+      }
+    </button>
+
+  </div>
+
+  <!-- ── Session Dots ── -->
+  <div class="flex flex-col items-center gap-2">
+    <div class="flex gap-2.5" [attr.aria-label]="i18n.t().sessions + ': ' + timer.sessions()">
+      @for (filled of timer.sessionDots(); track $index) {
+        <div
+          class="w-2.5 h-2.5 rounded-full transition-all duration-300"
+          [class]="filled
+            ? 'bg-purple shadow-[0_0_8px_rgba(124,58,237,0.7)] scale-110'
+            : 'bg-white/15'">
+        </div>
+      }
+    </div>
+    <span class="text-xs text-muted">
+      {{ timer.sessions() }} {{ i18n.t().sessions }}
+    </span>
+  </div>
+
+</div>
