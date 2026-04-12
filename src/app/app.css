@@ -1,0 +1,6 @@
+/* App-level styles — component-scoped */
+
+:host {
+  display: block;
+  min-height: 100dvh;
+}
