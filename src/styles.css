@@ -1,3 +1,227 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+/* ─── Dark mode via .dark class on <html> ─── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Design Tokens ─── */
+@theme {
+  --font-sans: 'Inter', 'Space Grotesk', system-ui, sans-serif;
+
+  --color-bg:          #090910;
+  --color-surface:     #0f0f1a;
+  --color-card:        #13131f;
+  --color-border:      rgba(255,255,255,0.07);
+
+  --color-purple:      #7c3aed;
+  --color-purple-lt:   #a855f7;
+  --color-cyan:        #06b6d4;
+  --color-emerald:     #10b981;
+  --color-amber:       #f59e0b;
+  --color-rose:        #f43f5e;
+
+  --color-text:        #f1f5f9;
+  --color-muted:       #64748b;
+  --color-subtle:      #1e293b;
+}
+
+/* ─── Global Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #090910;
+  color: #f1f5f9;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode body overrides */
+body.light-mode {
+  background: #f0f2f9;
+  color: #0f172a;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.35);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.6); }
+
+/* ─── Focus Ring (a11y) ─── */
+:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Keyframe Animations ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(124, 58, 237, 0.5)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(124, 58, 237, 0.9)); }
+}
+
+@keyframes glowCyan {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.5)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(6, 182, 212, 0.9)); }
+}
+
+@keyframes tickPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.015); }
+}
+
+@keyframes shimmerGrad {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes spinProgress {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+
+/* ─── Utility Classes ─── */
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-animate {
+  background: linear-gradient(
+    270deg,
+    #a855f7, #06b6d4, #7c3aed, #a855f7
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerGrad 4s ease infinite;
+}
+
+/* Glow effects */
+.glow-purple { box-shadow: 0 0 40px rgba(124, 58, 237, 0.25); }
+.glow-cyan   { box-shadow: 0 0 40px rgba(6, 182, 212, 0.25); }
+
+/* Animation classes */
+.anim-fade-up   { animation: fadeInUp   0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-slide-left { animation: slideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-scale-in  { animation: scaleIn    0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-slide-down { animation: slideDown  0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Timer ring glow when running */
+.ring-glow-focus { animation: glowPulse 2s ease-in-out infinite; }
+.ring-glow-break { animation: glowCyan  2s ease-in-out infinite; }
+
+/* Tick pulse on time text when running */
+.tick-pulse { animation: tickPulse 1s ease-in-out infinite; }
+
+/* ─── Priority Indicators ─── */
+.priority-dot-high   { background: #f43f5e; box-shadow: 0 0 8px rgba(244, 63, 94, 0.5); }
+.priority-dot-medium { background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+.priority-dot-low    { background: #10b981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
+
+/* ─── Stagger animation delays for task list ─── */
+.stagger-1  { animation-delay: 0.05s; }
+.stagger-2  { animation-delay: 0.10s; }
+.stagger-3  { animation-delay: 0.15s; }
+.stagger-4  { animation-delay: 0.20s; }
+.stagger-5  { animation-delay: 0.25s; }
+
+/* ─── Custom input/select styling ─── */
+input, textarea, select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* ─── Light mode CSS variable overrides ─── */
+/* When .dark is absent on <html>, these override the @theme defaults */
+html:not(.dark) {
+  --color-bg:      #eef0f8;
+  --color-surface: #f8fafc;
+  --color-card:    #ffffff;
+  --color-border:  rgba(0, 0, 0, 0.08);
+  --color-text:    #0f172a;
+  --color-muted:   #475569;
+  --color-subtle:  #e2e8f0;
+}
+
+html:not(.dark) body {
+  background: #eef0f8;
+  color: #0f172a;
+}
+
+html:not(.dark) .glass {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+html:not(.dark) .glow-purple {
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.12);
+}
+
+/* ─── Scrollbar hide utility ─── */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
