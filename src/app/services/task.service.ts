@@ -34,6 +34,7 @@ export class TaskService {
     return [...base].sort((a, b) => ORDER[a.priority] - ORDER[b.priority]);
   });
 
+  /** Creates a new task with a unique ID and creation date, inserting it at the top of the list. */
   add(data: Omit<Task, 'id' | 'createdAt'>): void {
     const task: Task = {
       ...data,
@@ -44,6 +45,7 @@ export class TaskService {
     this.persist();
   }
 
+  /** Applies partial changes to an existing task; stamps `completedAt` when the new status is 'done'. */
   update(id: string, patch: Partial<Omit<Task, 'id' | 'createdAt'>>): void {
     this._tasks.update(ts =>
       ts.map(t => {
@@ -58,19 +60,23 @@ export class TaskService {
     this.persist();
   }
 
+  /** Permanently removes a task from the list by its ID. */
   remove(id: string): void {
     this._tasks.update(ts => ts.filter(t => t.id !== id));
     this.persist();
   }
 
+  /** Returns the task matching the given ID, or `undefined` if not found. */
   getById(id: string): Task | undefined {
     return this._tasks().find(t => t.id === id);
   }
 
+  /** Serializes the current task state to `localStorage` to persist data across sessions. */
   private persist(): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this._tasks()));
   }
 
+  /** Reads and deserializes tasks from `localStorage`; returns an empty array if no data exists or the JSON is invalid. */
   private load(): Task[] {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);

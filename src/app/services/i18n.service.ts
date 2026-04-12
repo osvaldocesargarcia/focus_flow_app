@@ -142,10 +142,12 @@ export class I18nService {
     });
   }
 
+  /** Switches the active language between English and Portuguese. */
   toggle(): void {
     this.lang.update(l => (l === 'en' ? 'pt' : 'en'));
   }
 
+  /** Resolves the initial language from localStorage, falling back to the browser locale or English. */
   private loadLang(): Lang {
     const saved = localStorage.getItem('ff:lang') as Lang | null;
     if (saved && (saved === 'en' || saved === 'pt')) return saved;

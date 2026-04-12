@@ -15,10 +15,12 @@ export class ThemeService {
     });
   }
 
+  /** Toggles the theme between dark and light mode. */
   toggle(): void {
     this.isDark.update(v => !v);
   }
 
+  /** Adds or removes the 'dark' CSS class on the document to apply the selected theme. */
   private applyTheme(dark: boolean): void {
     const html = document.documentElement;
     const body = document.body;
@@ -31,6 +33,7 @@ export class ThemeService {
     }
   }
 
+  /** Reads the saved theme preference from localStorage, falling back to the OS color-scheme setting. */
   private loadPreference(): boolean {
     const saved = localStorage.getItem('ff:dark');
     if (saved !== null) return JSON.parse(saved) as boolean;

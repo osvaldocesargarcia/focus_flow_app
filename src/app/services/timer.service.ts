@@ -40,6 +40,7 @@ export class TimerService {
 
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
+  /** Switches the timer to the given mode, resets the countdown, and stops any active interval. */
   setMode(mode: TimerMode): void {
     this.clearTimer();
     this.mode.set(mode);
@@ -47,10 +48,12 @@ export class TimerService {
     this.state.set('idle');
   }
 
+  /** Starts the timer if it is idle or paused; pauses it if it is currently running. */
   toggle(): void {
     this.state() === 'running' ? this.pause() : this.start();
   }
 
+  /** Begins the countdown interval, decrementing `timeLeft` every second until it reaches zero. */
   start(): void {
     if (this.state() === 'running') return;
     this.state.set('running');
@@ -64,18 +67,21 @@ export class TimerService {
     }, 1000);
   }
 
+  /** Pauses the running timer, preserving the remaining time. */
   pause(): void {
     if (this.state() !== 'running') return;
     this.state.set('paused');
     this.clearTimer();
   }
 
+  /** Stops the timer and restores `timeLeft` to the full duration of the current mode. */
   reset(): void {
     this.clearTimer();
     this.timeLeft.set(DURATIONS[this.mode()]);
     this.state.set('idle');
   }
 
+  /** Handles session completion: increments the session counter (focus only), resets state, and triggers a notification. */
   private complete(): void {
     this.clearTimer();
     if (this.mode() === 'focus') {
@@ -86,6 +92,7 @@ export class TimerService {
     this.notify();
   }
 
+  /** Sends a browser notification when a session ends, requesting permission first if not yet granted. */
   private notify(): void {
     if (!('Notification' in window)) return;
     const body = this.mode() === 'focus'
@@ -101,6 +108,7 @@ export class TimerService {
     }
   }
 
+  /** Clears the active `setInterval` and nullifies the reference to prevent memory leaks. */
   private clearTimer(): void {
     if (this.intervalId !== null) {
       clearInterval(this.intervalId);
