@@ -131,6 +131,9 @@ export interface Translations {
   // Nav
   darkMode:     string;
   lightMode:    string;
+  // Music player
+  musicPlayer:  string;
+  musicHint:    string;
   // Placeholder
   titlePlaceholder: string;
   descPlaceholder:  string;
@@ -349,6 +352,8 @@ const EN: Translations = {
   noTasksHint:  'Add a task and pair it with your focus session.',
   darkMode:     'Dark mode',
   lightMode:    'Light mode',
+  musicPlayer:  'Focus Music',
+  musicHint:    'Music to keep you in the zone',
   titlePlaceholder: 'What needs to be done?',
   descPlaceholder:  'Optional details…',
   home: HOME_EN,
@@ -389,6 +394,8 @@ const PT: Translations = {
   noTasksHint:  'Adicione uma tarefa e combine com a sua sessão de foco.',
   darkMode:     'Modo escuro',
   lightMode:    'Modo claro',
+  musicPlayer:  'Música de Foco',
+  musicHint:    'Música para manter o foco',
   titlePlaceholder: 'O que precisa de ser feito?',
   descPlaceholder:  'Detalhes opcionais…',
   home: HOME_PT,

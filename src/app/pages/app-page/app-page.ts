@@ -6,11 +6,12 @@ import { TaskService } from '../../services/task.service';
 import { TimerComponent } from '../../components/timer/timer';
 import { TaskListComponent } from '../../components/task-list/task-list';
 import { TaskFormComponent } from '../../components/task-form/task-form';
+import { SpotifyPlayerComponent } from '../../components/spotify-player/spotify-player';
 
 @Component({
   selector: 'app-app-page',
   standalone: true,
-  imports: [RouterLink, TimerComponent, TaskListComponent, TaskFormComponent],
+  imports: [RouterLink, TimerComponent, TaskListComponent, TaskFormComponent, SpotifyPlayerComponent],
   templateUrl: './app-page.html',
 })
 export class AppPageComponent {
