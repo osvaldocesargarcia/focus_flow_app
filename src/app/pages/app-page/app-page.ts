@@ -1,19 +1,20 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import { I18nService } from '../../services/i18n.service';
+import { TaskService } from '../../services/task.service';
 import { TimerComponent } from '../../components/timer/timer';
 import { TaskListComponent } from '../../components/task-list/task-list';
+import { TaskFormComponent } from '../../components/task-form/task-form';
 
 @Component({
   selector: 'app-app-page',
   standalone: true,
-  imports: [RouterLink, TimerComponent, TaskListComponent],
+  imports: [RouterLink, TimerComponent, TaskListComponent, TaskFormComponent],
   templateUrl: './app-page.html',
 })
-export class AppPageComponent implements OnInit {
-  readonly theme = inject(ThemeService);
-  readonly i18n  = inject(I18nService);
-
-  ngOnInit(): void {}
+export class AppPageComponent {
+  readonly theme       = inject(ThemeService);
+  readonly i18n        = inject(I18nService);
+  readonly taskService = inject(TaskService);
 }

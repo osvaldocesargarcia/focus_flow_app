@@ -118,3 +118,10 @@
   </footer>
 
 </div>
+
+<!-- ── Task Form Modal (rendered at root to escape backdrop-filter stacking contexts) ── -->
+@if (taskService.showForm()) {
+  <app-task-form
+    [task]="taskService.editTarget()"
+    (closed)="taskService.closeForm()"/>
+}

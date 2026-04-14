@@ -10,6 +10,25 @@ export class TaskService {
   /** Active filter */
   readonly filter = signal<TaskStatus | 'all'>('all');
 
+  /** Form visibility state (lifted here so the modal renders at the app root) */
+  readonly showForm   = signal(false);
+  readonly editTarget = signal<Task | null>(null);
+
+  openAdd(): void {
+    this.editTarget.set(null);
+    this.showForm.set(true);
+  }
+
+  openEdit(task: Task): void {
+    this.editTarget.set(task);
+    this.showForm.set(true);
+  }
+
+  closeForm(): void {
+    this.showForm.set(false);
+    this.editTarget.set(null);
+  }
+
   /** All tasks (unfiltered) */
   readonly tasks = this._tasks.asReadonly();
 
