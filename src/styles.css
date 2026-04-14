@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* ─── Dark mode via .dark class on <html> ─── */
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:whe(.dark, .dark *));
 
 /* ─── Design Tokens ─── */
 @theme {
@@ -12,8 +12,8 @@
   --color-card:        #13131f;
   --color-border:      rgba(255,255,255,0.07);
 
-  --color-purple:      #7c3aed;
-  --color-purple-lt:   #a855f7;
+  --color-purple: #3aaeed;
+  --color-purple-lt: #5588f7;
   --color-cyan:        #06b6d4;
   --color-emerald:     #10b981;
   --color-amber:       #f59e0b;
