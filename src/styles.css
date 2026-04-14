@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* ─── Dark mode via .dark class on <html> ─── */
-@custom-variant dark (&:whe(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ─── Design Tokens ─── */
 @theme {
