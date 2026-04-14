@@ -7,11 +7,12 @@ import { TimerComponent } from '../../components/timer/timer';
 import { TaskListComponent } from '../../components/task-list/task-list';
 import { TaskFormComponent } from '../../components/task-form/task-form';
 import { SpotifyPlayerComponent } from '../../components/spotify-player/spotify-player';
+import { ScratchpadComponent } from '../../components/scratchpad/scratchpad';
 
 @Component({
   selector: 'app-app-page',
   standalone: true,
-  imports: [RouterLink, TimerComponent, TaskListComponent, TaskFormComponent, SpotifyPlayerComponent],
+  imports: [RouterLink, TimerComponent, TaskListComponent, TaskFormComponent, SpotifyPlayerComponent, ScratchpadComponent],
   templateUrl: './app-page.html',
 })
 export class AppPageComponent {

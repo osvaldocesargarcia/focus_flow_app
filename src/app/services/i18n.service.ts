@@ -134,6 +134,10 @@ export interface Translations {
   // Music player
   musicPlayer:  string;
   musicHint:    string;
+  // Scratchpad
+  scratchpad:      string;
+  scratchpadHint:  string;
+  scratchpadClear: string;
   // Placeholder
   titlePlaceholder: string;
   descPlaceholder:  string;
@@ -156,7 +160,7 @@ const HOME_EN: HomeTranslations = {
   heroStatProductiveLabel: 'more productive',
   heroStatFreeLabel:     'free',
   heroLive:              'Live',
-  heroTaskChip:          'Design Hero component…',
+  heroTaskChip:          'Stay focused..!',
   // Pomodoro section
   pomoBadge:             'The Pomodoro Technique',
   pomoHeadline:          'Simple. Powerful.',
@@ -244,7 +248,7 @@ const HOME_PT: HomeTranslations = {
   heroStatProductiveLabel: 'mais produtivo',
   heroStatFreeLabel:     'gratuito',
   heroLive:              'Ao vivo',
-  heroTaskChip:          'Projetar componente Hero…',
+  heroTaskChip:          'Mantenha o foco..!',
   // Pomodoro section
   pomoBadge:             'A Técnica Pomodoro',
   pomoHeadline:          'Simples. Poderoso.',
@@ -354,6 +358,9 @@ const EN: Translations = {
   lightMode:    'Light mode',
   musicPlayer:  'Focus Music',
   musicHint:    'Music to keep you in the zone',
+  scratchpad:      'Quick Notes',
+  scratchpadHint:  'Capture distractions without losing focus',
+  scratchpadClear: 'Clear',
   titlePlaceholder: 'What needs to be done?',
   descPlaceholder:  'Optional details…',
   home: HOME_EN,
@@ -396,6 +403,9 @@ const PT: Translations = {
   lightMode:    'Modo claro',
   musicPlayer:  'Música de Foco',
   musicHint:    'Música para manter o foco',
+  scratchpad:      'Notas Rápidas',
+  scratchpadHint:  'Capture distrações sem perder o foco',
+  scratchpadClear: 'Limpar',
   titlePlaceholder: 'O que precisa de ser feito?',
   descPlaceholder:  'Detalhes opcionais…',
   home: HOME_PT,
