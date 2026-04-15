@@ -1,59 +1,84 @@
-# FocusFlowApp
+# FocusFlow
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+A task management + Pomodoro focus timer app built as a frontend technical challenge.
 
-## Development server
+## Overview
 
-To start a local development server, run:
+FocusFlow combines a Kanban-style task board with a Pomodoro timer so you can manage what needs to get done and stay focused while doing it. Start a focus session directly from any task — the timer launches, the task moves to *in-progress*, and its name appears above the countdown ring so you always know what you're working on.
+
+
+![IMG](doc/images/FocusFlow_visual selection.png)
+
+## Features
+
+- **Task management** — Create, edit, and delete tasks with title, description, priority (high / medium / low), and status (todo / in-progress / done)
+- **Pomodoro timer** — Focus (25 min), short break (5 min), and long break (15 min) modes with an animated SVG progress ring
+- **Task → Timer link** — Play button on each task starts the Pomodoro immediately, sets that task as *in-progress*, and displays its name above the timer. Only one task can be in-progress at a time
+- **Session tracking** — Dot indicators track completed focus sessions (4 per cycle)
+- **Scratchpad** — Quick inline notes panel for thoughts during a session
+- **Dark / light mode** — Toggles via a CSS variable cascade; dark-first design
+- **Bilingual UI** — English and Portuguese (PT) via a built-in i18n service
+- **Persistent state** — Tasks saved to `localStorage` across sessions
+- **Browser notifications** — Alerts when a focus or break session ends
+
+## Stack
+
+
+| Layer     | Choice                                      |
+|-----------|---------------------------------------------|
+| Framework | Angular 21 (standalone components, signals) |
+| Styling   | Tailwind CSS v4 (`@tailwindcss/postcss`)    |
+| Language  | TypeScript (strict)                         |
+| State     | Angular signals + `localStorage`            |
+
+## Architecture
+
+![IMG](doc/images/FocusFlow_architecture.png)
+```
+src/app/
+├── models/
+│   └── task.model.ts          # Task, TaskStatus, TaskPriority types
+├── services/
+│   ├── task.service.ts        # CRUD, filters, localStorage persistence
+│   ├── timer.service.ts       # Pomodoro logic, active task tracking
+│   ├── i18n.service.ts        # EN / PT translations
+│   └── theme.service.ts       # Dark mode toggle
+├── components/
+│   ├── timer/                 # SVG ring timer + mode tabs + controls
+│   ├── task-list/             # Filter tabs, empty state, task grid
+│   ├── task-item/             # Task card with play/edit/delete actions
+│   ├── task-form/             # Create / edit modal
+│   ├── scratchpad/            # Quick notes panel
+│   └── spotify-player/        # Embedded player widget
+└── pages/
+    ├── home/                  # Landing / marketing page
+    └── app-page/              # Main two-column app layout
+```
+
+## Getting started
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 ng serve
-```
+# → http://localhost:4200
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
+# Production build
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
+# Run tests
 ng test
 ```
 
-## Running end-to-end tests
+## Design notes
 
-For end-to-end (e2e) testing, run:
+- **Color palette** — Purple (`#7c3aed`) + Cyan (`#06b6d4`) accents on a dark base
+- **Typography** — Space Grotesk for headings, system sans for body
+- **Glassmorphism** — Cards use translucent backgrounds + backdrop blur
+- **Animations** — SVG ring progress with cubic-bezier easing, fade-up entry animations, ping pulse on active task button
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+![IMG](doc/images/screenshot1.png)
+![IMG](doc/images/screenshot2.png)
