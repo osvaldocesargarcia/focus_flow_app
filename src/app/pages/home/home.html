@@ -119,13 +119,15 @@
         </div>
 
         <!-- Headline -->
-        <h1 class="font-['Space_Grotesk'] font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-6">
+        <h1 scrollFloat [scrollFloatDelay]="0" [scrollFloatOffset]="50"
+            class="font-['Space_Grotesk'] font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-6">
           {{ i18n.t().home.heroHeadline }}<br>
           <span class="gradient-text-animate">{{ i18n.t().home.heroHeadlineGradient }}</span>
         </h1>
 
         <!-- Subheadline -->
-        <p class="text-base sm:text-lg text-muted leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+        <p scrollFloat [scrollFloatDelay]="120" [scrollFloatOffset]="35"
+           class="text-base sm:text-lg text-muted leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
           {{ i18n.t().home.heroSubline }}
           <strong class="text-text font-semibold">{{ i18n.t().home.heroSublineStrong }}</strong>
           {{ i18n.lang() === 'en' ? 'and achieve more in less time.' : 'e conquiste mais em menos tempo.' }}
@@ -266,11 +268,13 @@
         </svg>
         {{ i18n.t().home.pomoBadge }}
       </div>
-      <h2 class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl text-text mb-4">
+      <h2 scrollFloat [scrollFloatDelay]="80" [scrollFloatOffset]="40"
+          class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl text-text mb-4">
         {{ i18n.t().home.pomoHeadline }}
         <span class="gradient-text">{{ i18n.t().home.pomoHeadlineGradient }}</span>
       </h2>
-      <p class="text-muted text-base max-w-xl mx-auto leading-relaxed">
+      <p scrollFloat [scrollFloatDelay]="180" [scrollFloatOffset]="30"
+         class="text-muted text-base max-w-xl mx-auto leading-relaxed">
         {{ i18n.t().home.pomoDesc }}
       </p>
     </div>
@@ -372,11 +376,13 @@
         </svg>
         {{ i18n.t().home.benefitsBadge }}
       </div>
-      <h2 class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl text-text mb-4">
+      <h2 scrollFloat [scrollFloatDelay]="60" [scrollFloatOffset]="40"
+          class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl text-text mb-4">
         {{ i18n.t().home.benefitsHeadline }}
         <span class="gradient-text">{{ i18n.t().home.benefitsHeadlineGradient }}</span>
       </h2>
-      <p class="text-muted text-base max-w-xl mx-auto leading-relaxed">
+      <p scrollFloat [scrollFloatDelay]="160" [scrollFloatOffset]="30"
+         class="text-muted text-base max-w-xl mx-auto leading-relaxed">
         {{ i18n.t().home.benefitsDesc }}
       </p>
     </div>
@@ -518,11 +524,13 @@
         </svg>
         {{ i18n.t().home.featuresBadge }}
       </div>
-      <h2 class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl text-text mb-4">
+      <h2 scrollFloat [scrollFloatDelay]="60" [scrollFloatOffset]="40"
+          class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl text-text mb-4">
         {{ i18n.t().home.featuresHeadline }}
         <span class="gradient-text">{{ i18n.t().home.featuresHeadlineGradient }}</span>
       </h2>
-      <p class="text-muted text-base max-w-xl mx-auto leading-relaxed">
+      <p scrollFloat [scrollFloatDelay]="160" [scrollFloatOffset]="30"
+         class="text-muted text-base max-w-xl mx-auto leading-relaxed">
         {{ i18n.t().home.featuresDesc }}
       </p>
     </div>
@@ -647,11 +655,13 @@
           </svg>
         </div>
 
-        <h2 class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl lg:text-5xl text-text mb-4">
+        <h2 scrollFloat [scrollFloatDelay]="50" [scrollFloatOffset]="45"
+            class="font-['Space_Grotesk'] font-bold text-3xl sm:text-4xl lg:text-5xl text-text mb-4">
           {{ i18n.t().home.ctaHeadline }}<br>
           <span class="gradient-text-animate">{{ i18n.t().home.ctaHeadlineGradient }}</span>
         </h2>
-        <p class="text-muted text-base sm:text-lg max-w-lg mx-auto mb-10 leading-relaxed">
+        <p scrollFloat [scrollFloatDelay]="150" [scrollFloatOffset]="30"
+           class="text-muted text-base sm:text-lg max-w-lg mx-auto mb-10 leading-relaxed">
           {{ i18n.t().home.ctaDesc }}
         </p>
 

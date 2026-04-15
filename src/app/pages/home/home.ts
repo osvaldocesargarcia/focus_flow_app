@@ -2,11 +2,12 @@ import { Component, inject, signal, AfterViewInit, OnDestroy } from '@angular/co
 import { RouterLink } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import { I18nService } from '../../services/i18n.service';
+import { ScrollFloatDirective } from '../../directives/scroll-float.directive';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ScrollFloatDirective],
   templateUrl: './home.html',
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
