@@ -1,5 +1,6 @@
 import { Component, inject, computed, OnDestroy } from '@angular/core';
 import { TimerService, TimerMode } from '../../services/timer.service';
+import { TaskService } from '../../services/task.service';
 import { I18nService } from '../../services/i18n.service';
 
 @Component({
@@ -8,8 +9,9 @@ import { I18nService } from '../../services/i18n.service';
   templateUrl: './timer.html',
 })
 export class TimerComponent implements OnDestroy {
-  readonly timer = inject(TimerService);
-  readonly i18n  = inject(I18nService);
+  readonly timer       = inject(TimerService);
+  readonly taskService = inject(TaskService);
+  readonly i18n        = inject(I18nService);
 
   /** SVG ring geometry */
   readonly R            = 88;
@@ -46,6 +48,24 @@ export class TimerComponent implements OnDestroy {
 
   setMode(mode: TimerMode): void {
     this.timer.setMode(mode);
+  }
+
+  onStop(): void {
+    const id = this.timer.activeTaskId();
+    if (id) {
+      this.taskService.update(id, { status: 'todo' });
+      this.taskService.followStatus('todo');
+    }
+    this.timer.reset();
+  }
+
+  onMarkDone(): void {
+    const id = this.timer.activeTaskId();
+    if (id) {
+      this.taskService.update(id, { status: 'done' });
+      this.taskService.followStatus('done');
+    }
+    this.timer.reset();
   }
 
   ngOnDestroy(): void {

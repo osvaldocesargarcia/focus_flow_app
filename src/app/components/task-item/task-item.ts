@@ -37,6 +37,11 @@ export class TaskItemComponent {
     this.taskService.setInProgress(task.id);
     this.taskService.followStatus('in-progress');
     this.timerService.startForTask(task.id, task.title);
+    if (window.innerWidth < 640) {
+      setTimeout(() => {
+        document.querySelector('app-timer')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 80);
+    }
   }
 
   onStop(): void {
