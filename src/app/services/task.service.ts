@@ -80,6 +80,11 @@ export class TaskService {
     this.persist();
   }
 
+  /** If the active filter is not 'all', switches it to match the given status so the task stays visible. */
+  followStatus(status: TaskStatus): void {
+    if (this.filter() !== 'all') this.filter.set(status);
+  }
+
   /** Sets one task as 'in-progress' and reverts any other in-progress task back to 'todo'. */
   setInProgress(id: string): void {
     this._tasks.update(ts =>

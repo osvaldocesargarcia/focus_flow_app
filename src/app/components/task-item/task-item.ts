@@ -35,21 +35,25 @@ export class TaskItemComponent {
   onStartFocus(): void {
     const task = this.task();
     this.taskService.setInProgress(task.id);
+    this.taskService.followStatus('in-progress');
     this.timerService.startForTask(task.id, task.title);
   }
 
   onStop(): void {
     this.taskService.update(this.task().id, { status: 'todo' });
+    this.taskService.followStatus('todo');
     if (this.isActiveTask()) this.timerService.reset();
   }
 
   onMarkDone(): void {
     this.taskService.update(this.task().id, { status: 'done' });
+    this.taskService.followStatus('done');
     if (this.isActiveTask()) this.timerService.reset();
   }
 
   onResetTodo(): void {
     this.taskService.update(this.task().id, { status: 'todo' });
+    this.taskService.followStatus('todo');
   }
 
   readonly isActiveTask = () =>
