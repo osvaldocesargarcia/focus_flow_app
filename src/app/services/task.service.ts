@@ -53,10 +53,11 @@ export class TaskService {
     return [...base].sort((a, b) => ORDER[a.priority] - ORDER[b.priority]);
   });
 
-  /** Creates a new task with a unique ID and creation date, inserting it at the top of the list. */
-  add(data: Omit<Task, 'id' | 'createdAt'>): void {
+  /** Creates a new task with a unique ID and creation date, inserting it at the top of the list. New tasks always start as 'todo'. */
+  add(data: Omit<Task, 'id' | 'createdAt' | 'status'>): void {
     const task: Task = {
       ...data,
+      status:    'todo',
       id:        crypto.randomUUID(),
       createdAt: new Date().toISOString(),
     };

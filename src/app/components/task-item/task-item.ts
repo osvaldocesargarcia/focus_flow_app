@@ -1,5 +1,5 @@
 import { Component, inject, input, output, signal } from '@angular/core';
-import { Task, TaskStatus } from '../../models/task.model';
+import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { TimerService } from '../../services/timer.service';
 import { I18nService } from '../../services/i18n.service';
@@ -28,15 +28,6 @@ export class TaskItemComponent {
     this.selected.set(false);
   }
 
-  cycleStatus(): void {
-    const cycle: Record<TaskStatus, TaskStatus> = {
-      'todo':        'in-progress',
-      'in-progress': 'done',
-      'done':        'todo',
-    };
-    this.taskService.update(this.task().id, { status: cycle[this.task().status] });
-  }
-
   onEdit(): void {
     this.editClick.emit(this.task());
   }
@@ -45,6 +36,20 @@ export class TaskItemComponent {
     const task = this.task();
     this.taskService.setInProgress(task.id);
     this.timerService.startForTask(task.id, task.title);
+  }
+
+  onStop(): void {
+    this.taskService.update(this.task().id, { status: 'todo' });
+    if (this.isActiveTask()) this.timerService.reset();
+  }
+
+  onMarkDone(): void {
+    this.taskService.update(this.task().id, { status: 'done' });
+    if (this.isActiveTask()) this.timerService.reset();
+  }
+
+  onResetTodo(): void {
+    this.taskService.update(this.task().id, { status: 'todo' });
   }
 
   readonly isActiveTask = () =>

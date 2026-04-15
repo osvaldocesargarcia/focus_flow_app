@@ -1,6 +1,6 @@
 import { Component, inject, input, output, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Task, TaskStatus, TaskPriority } from '../../models/task.model';
+import { Task, TaskPriority } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { I18nService } from '../../services/i18n.service';
 
@@ -23,7 +23,6 @@ export class TaskFormComponent implements OnInit {
   // Form state
   title       = signal('');
   description = signal('');
-  status      = signal<TaskStatus>('todo');
   priority    = signal<TaskPriority>('medium');
 
   readonly isEditing = signal(false);
@@ -34,7 +33,6 @@ export class TaskFormComponent implements OnInit {
       this.isEditing.set(true);
       this.title.set(t.title);
       this.description.set(t.description);
-      this.status.set(t.status);
       this.priority.set(t.priority);
     }
   }
@@ -46,7 +44,6 @@ export class TaskFormComponent implements OnInit {
     const data = {
       title,
       description: this.description().trim(),
-      status:   this.status(),
       priority: this.priority(),
     };
 

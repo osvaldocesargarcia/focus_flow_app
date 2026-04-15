@@ -15,28 +15,6 @@
     [class]="priorityMeta[task().priority].dotClass">
   </div>
 
-  <!-- ── Status toggle button ── -->
-  <button
-    (click)="$event.stopPropagation(); cycleStatus()"
-    class="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center
-           transition-all duration-200 cursor-pointer hover:scale-110"
-    [class]="[
-      task().status === 'done'
-        ? 'bg-emerald border-emerald text-white shadow-[0_0_10px_rgba(16,185,129,0.4)]'
-        : task().status === 'in-progress'
-          ? 'border-amber bg-amber/10'
-          : 'border-white/25 hover:border-purple'
-    ].join(' ')"
-    [attr.aria-label]="'Cycle status: ' + task().status">
-    @if (task().status === 'done') {
-      <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
-      </svg>
-    } @else if (task().status === 'in-progress') {
-      <div class="w-2 h-2 rounded-full bg-amber"></div>
-    }
-  </button>
-
   <!-- ── Task content ── -->
   <div class="flex-1 min-w-0">
 
@@ -49,37 +27,81 @@
       </span>
 
       <!-- Action buttons -->
-      <div class="flex gap-1 flex-shrink-0 items-start">
+      <div class="flex gap-1 flex-shrink-0 items-center">
 
-        <!-- Focus / Play — siempre visible cuando está activa, si no, solo en hover/selected -->
-        <button
-          (click)="$event.stopPropagation(); onStartFocus()"
-          class="w-7 h-7 rounded-xl flex items-center justify-center
-                 transition-all duration-150 cursor-pointer"
-          [class]="isActiveTask()
-            ? 'opacity-100 text-cyan bg-cyan/15 shadow-[0_0_10px_rgba(6,182,212,0.35)]'
-            : (selected() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100') + ' text-muted hover:text-cyan hover:bg-cyan/10'"
-          aria-label="Start focus">
-          @if (isActiveTask()) {
-            <span class="relative flex items-center justify-center">
-              <span class="absolute w-4 h-4 rounded-full bg-cyan/30 animate-ping"></span>
-              <svg class="w-3.5 h-3.5 relative" viewBox="0 0 24 24" fill="currentColor">
+        <!-- Stop — solo visible cuando in-progress, siempre -->
+        @if (task().status === 'in-progress') {
+          <button
+            (click)="$event.stopPropagation(); onStop()"
+            class="w-7 h-7 rounded-xl flex items-center justify-center
+                   text-amber bg-amber/10 hover:bg-amber/20
+                   transition-all duration-150 cursor-pointer"
+            title="Volver a todo">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        }
+
+        <!-- Check — solo visible cuando in-progress, siempre -->
+        @if (task().status === 'in-progress') {
+          <button
+            (click)="$event.stopPropagation(); onMarkDone()"
+            class="w-7 h-7 rounded-xl flex items-center justify-center
+                   text-emerald bg-emerald/10 hover:bg-emerald/20
+                   transition-all duration-150 cursor-pointer"
+            title="Marcar como done">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+            </svg>
+          </button>
+        }
+
+        <!-- Reset — solo visible cuando done, siempre -->
+        @if (task().status === 'done') {
+          <button
+            (click)="$event.stopPropagation(); onResetTodo()"
+            class="w-7 h-7 rounded-xl flex items-center justify-center
+                   text-muted bg-white/5 hover:text-text hover:bg-white/10
+                   transition-all duration-150 cursor-pointer"
+            title="Volver a todo">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+            </svg>
+          </button>
+        }
+
+        <!-- Play — siempre visible cuando activa, si no solo en hover/selected. Oculto si done -->
+        @if (task().status !== 'done') {
+          <button
+            (click)="$event.stopPropagation(); onStartFocus()"
+            class="w-7 h-7 rounded-xl flex items-center justify-center
+                   transition-all duration-150 cursor-pointer"
+            [class]="isActiveTask()
+              ? 'opacity-100 text-cyan bg-cyan/15 shadow-[0_0_10px_rgba(6,182,212,0.35)]'
+              : (selected() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100') + ' text-muted hover:text-cyan hover:bg-cyan/10'"
+            aria-label="Start focus">
+            @if (isActiveTask()) {
+              <span class="relative flex items-center justify-center">
+                <span class="absolute w-4 h-4 rounded-full bg-cyan/30 animate-ping"></span>
+                <svg class="w-3.5 h-3.5 relative" viewBox="0 0 24 24" fill="currentColor">
+                  <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/>
+                </svg>
+              </span>
+            } @else {
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/>
               </svg>
-            </span>
-          } @else {
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/>
-            </svg>
-          }
-        </button>
+            }
+          </button>
+        }
 
         <!-- Edit + Delete: solo en hover/selected -->
         <div
           class="flex gap-1 transition-opacity duration-150"
           [class]="selected() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'">
 
-          <!-- Edit -->
           <button
             (click)="$event.stopPropagation(); onEdit()"
             class="w-7 h-7 rounded-xl flex items-center justify-center
@@ -92,7 +114,6 @@
             </svg>
           </button>
 
-          <!-- Delete -->
           <button
             (click)="$event.stopPropagation(); onDeleteRequest()"
             class="w-7 h-7 rounded-xl flex items-center justify-center
@@ -119,7 +140,6 @@
     <!-- Meta row: status badge + priority -->
     <div class="flex items-center gap-2 mt-2.5">
 
-      <!-- Status badge -->
       <span
         class="inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium border"
         [class]="statusMeta[task().status].bgClass + ' ' + statusMeta[task().status].ring">
@@ -130,7 +150,6 @@
         }
       </span>
 
-      <!-- Priority dot + label -->
       <span class="flex items-center gap-1">
         <span
           class="w-1.5 h-1.5 rounded-full"
