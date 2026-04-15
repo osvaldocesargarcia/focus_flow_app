@@ -1,6 +1,7 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { Task, TaskStatus } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
+import { TimerService } from '../../services/timer.service';
 import { I18nService } from '../../services/i18n.service';
 
 @Component({
@@ -9,13 +10,23 @@ import { I18nService } from '../../services/i18n.service';
   templateUrl: './task-item.html',
 })
 export class TaskItemComponent {
-  readonly taskService = inject(TaskService);
-  readonly i18n        = inject(I18nService);
+  readonly taskService  = inject(TaskService);
+  readonly timerService = inject(TimerService);
+  readonly i18n         = inject(I18nService);
 
   readonly task      = input.required<Task>();
   readonly editClick  = output<Task>();
 
   readonly confirmingDelete = signal(false);
+  readonly selected         = signal(false);
+
+  toggleSelected(): void {
+    this.selected.update(v => !v);
+  }
+
+  deselect(): void {
+    this.selected.set(false);
+  }
 
   cycleStatus(): void {
     const cycle: Record<TaskStatus, TaskStatus> = {
@@ -29,6 +40,16 @@ export class TaskItemComponent {
   onEdit(): void {
     this.editClick.emit(this.task());
   }
+
+  onStartFocus(): void {
+    const task = this.task();
+    this.taskService.setInProgress(task.id);
+    this.timerService.startForTask(task.id, task.title);
+  }
+
+  readonly isActiveTask = () =>
+    this.timerService.activeTaskId() === this.task().id &&
+    this.timerService.state() !== 'idle';
 
   onDeleteRequest(): void {
     this.confirmingDelete.set(true);

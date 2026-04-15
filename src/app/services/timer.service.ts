@@ -11,10 +11,12 @@ export const DURATIONS: Record<TimerMode, number> = {
 
 @Injectable({ providedIn: 'root' })
 export class TimerService {
-  readonly mode      = signal<TimerMode>('focus');
-  readonly state     = signal<TimerState>('idle');
-  readonly timeLeft  = signal<number>(DURATIONS['focus']);
-  readonly sessions  = signal<number>(0);
+  readonly mode           = signal<TimerMode>('focus');
+  readonly state          = signal<TimerState>('idle');
+  readonly timeLeft       = signal<number>(DURATIONS['focus']);
+  readonly sessions       = signal<number>(0);
+  readonly activeTaskName = signal<string | null>(null);
+  readonly activeTaskId   = signal<string | null>(null);
 
   /** 0 → 1 as timer counts down (0 = full ring, 1 = empty ring) */
   readonly progress = computed(() => {
@@ -39,6 +41,14 @@ export class TimerService {
   });
 
   private intervalId: ReturnType<typeof setInterval> | null = null;
+
+  /** Sets the active task, switches to focus mode, and starts the timer immediately. */
+  startForTask(taskId: string, taskName: string): void {
+    this.activeTaskId.set(taskId);
+    this.activeTaskName.set(taskName);
+    this.setMode('focus');
+    this.start();
+  }
 
   /** Switches the timer to the given mode, resets the countdown, and stops any active interval. */
   setMode(mode: TimerMode): void {
@@ -79,6 +89,8 @@ export class TimerService {
     this.clearTimer();
     this.timeLeft.set(DURATIONS[this.mode()]);
     this.state.set('idle');
+    this.activeTaskName.set(null);
+    this.activeTaskId.set(null);
   }
 
   /** Handles session completion: increments the session counter (focus only), resets state, and triggers a notification. */

@@ -79,6 +79,18 @@ export class TaskService {
     this.persist();
   }
 
+  /** Sets one task as 'in-progress' and reverts any other in-progress task back to 'todo'. */
+  setInProgress(id: string): void {
+    this._tasks.update(ts =>
+      ts.map(t => {
+        if (t.id === id)   return { ...t, status: 'in-progress' as TaskStatus };
+        if (t.status === 'in-progress') return { ...t, status: 'todo' as TaskStatus };
+        return t;
+      })
+    );
+    this.persist();
+  }
+
   /** Permanently removes a task from the list by its ID. */
   remove(id: string): void {
     this._tasks.update(ts => ts.filter(t => t.id !== id));

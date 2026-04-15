@@ -1,10 +1,13 @@
 <div
+  (click)="toggleSelected()"
   class="group relative flex gap-4 p-4 rounded-2xl
-         border border-white/6 hover:border-purple/30
-         transition-all duration-200 cursor-default
-         hover:bg-white/3 hover:shadow-lg hover:shadow-purple/5
+         border transition-all duration-200 cursor-pointer
+         hover:shadow-lg hover:shadow-purple/5
          anim-fade-up"
-  style="background: rgba(255,255,255,0.025);">
+  [class]="selected()
+    ? 'border-purple/40 shadow-md shadow-purple/10'
+    : 'border-white/6 hover:border-purple/30 hover:bg-white/3'"
+  [style.background]="selected() ? 'rgba(124,58,237,0.06)' : 'rgba(255,255,255,0.025)'">
 
   <!-- ── Priority bar (left accent) ── -->
   <div
@@ -14,7 +17,7 @@
 
   <!-- ── Status toggle button ── -->
   <button
-    (click)="cycleStatus()"
+    (click)="$event.stopPropagation(); cycleStatus()"
     class="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center
            transition-all duration-200 cursor-pointer hover:scale-110"
     [class]="[
@@ -45,32 +48,64 @@
         {{ task().title }}
       </span>
 
-      <!-- Action buttons (visible on hover) -->
-      <div class="flex gap-1 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-        <!-- Edit -->
+      <!-- Action buttons -->
+      <div class="flex gap-1 flex-shrink-0 items-start">
+
+        <!-- Focus / Play — siempre visible cuando está activa, si no, solo en hover/selected -->
         <button
-          (click)="onEdit()"
+          (click)="$event.stopPropagation(); onStartFocus()"
           class="w-7 h-7 rounded-xl flex items-center justify-center
-                 text-muted hover:text-purple hover:bg-purple/10
                  transition-all duration-150 cursor-pointer"
-          [attr.aria-label]="i18n.t().editTask">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"/>
-          </svg>
+          [class]="isActiveTask()
+            ? 'opacity-100 text-cyan bg-cyan/15 shadow-[0_0_10px_rgba(6,182,212,0.35)]'
+            : (selected() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100') + ' text-muted hover:text-cyan hover:bg-cyan/10'"
+          aria-label="Start focus">
+          @if (isActiveTask()) {
+            <span class="relative flex items-center justify-center">
+              <span class="absolute w-4 h-4 rounded-full bg-cyan/30 animate-ping"></span>
+              <svg class="w-3.5 h-3.5 relative" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/>
+              </svg>
+            </span>
+          } @else {
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd"/>
+            </svg>
+          }
         </button>
-        <!-- Delete -->
-        <button
-          (click)="onDeleteRequest()"
-          class="w-7 h-7 rounded-xl flex items-center justify-center
-                 text-muted hover:text-rose hover:bg-rose/10
-                 transition-all duration-150 cursor-pointer"
-          [attr.aria-label]="i18n.t().deleteTask">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
-          </svg>
-        </button>
+
+        <!-- Edit + Delete: solo en hover/selected -->
+        <div
+          class="flex gap-1 transition-opacity duration-150"
+          [class]="selected() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'">
+
+          <!-- Edit -->
+          <button
+            (click)="$event.stopPropagation(); onEdit()"
+            class="w-7 h-7 rounded-xl flex items-center justify-center
+                   text-muted hover:text-purple hover:bg-purple/10
+                   transition-all duration-150 cursor-pointer"
+            [attr.aria-label]="i18n.t().editTask">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"/>
+            </svg>
+          </button>
+
+          <!-- Delete -->
+          <button
+            (click)="$event.stopPropagation(); onDeleteRequest()"
+            class="w-7 h-7 rounded-xl flex items-center justify-center
+                   text-muted hover:text-rose hover:bg-rose/10
+                   transition-all duration-150 cursor-pointer"
+            [attr.aria-label]="i18n.t().deleteTask">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
+            </svg>
+          </button>
+
+        </div>
       </div>
     </div>
 

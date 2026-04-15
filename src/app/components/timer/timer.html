@@ -19,6 +19,18 @@
     }
   </div>
 
+  <!-- ── Active Task Label ── -->
+  @if (timer.activeTaskName()) {
+    <div class="flex items-center gap-2 px-4 py-2 rounded-2xl anim-fade-up"
+         style="background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2);">
+      <span class="w-1.5 h-1.5 rounded-full bg-cyan flex-shrink-0"
+            [class]="timer.isRunning() ? 'animate-pulse' : ''"></span>
+      <span class="text-xs font-medium text-cyan tracking-wide max-w-[180px] truncate">
+        {{ timer.activeTaskName() }}
+      </span>
+    </div>
+  }
+
   <!-- ── SVG Progress Ring ── -->
   <div class="relative flex items-center justify-center">
 
