@@ -7,7 +7,7 @@ A task management + Pomodoro focus timer app built as a frontend technical chall
 FocusFlow combines a Kanban-style task board with a Pomodoro timer so you can manage what needs to get done and stay focused while doing it. Start a focus session directly from any task — the timer launches, the task moves to *in-progress*, and its name appears above the countdown ring so you always know what you're working on.
 
 
-![IMG](doc/images/FocusFlow_visual selection.png)
+![IMG](doc/images/FocusFlow_visual_selection.png)
 
 ## Features
 
