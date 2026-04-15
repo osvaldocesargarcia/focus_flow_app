@@ -25,11 +25,12 @@
 
         <!-- Logo -->
         <div class="flex items-center gap-2.5">
-          <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-purple to-cyan flex items-center justify-center shadow-md">
+          <div
+            class="w-7 h-7 rounded-xl bg-gradient-to-br from-purple to-cyan flex items-center justify-center shadow-md">
             <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd"
-                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
-                clip-rule="evenodd"/>
+                    d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
+                    clip-rule="evenodd" />
             </svg>
           </div>
           <span class="font-['Space_Grotesk'] font-bold text-base tracking-tight gradient-text">
@@ -49,24 +50,24 @@
             @if (i18n.lang() === 'en') {
               <!-- Portugal flag -->
               <svg class="w-5 h-4 rounded-sm" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
-                <rect width="20" height="14" fill="#FF0000"/>
-                <rect width="8" height="14" fill="#006600"/>
-                <circle cx="8" cy="7" r="2.8" fill="#FFD700" stroke="#FFD700" stroke-width="0.3"/>
-                <circle cx="8" cy="7" r="2.2" fill="#003399" stroke="#FFD700" stroke-width="0.4"/>
-                <circle cx="8" cy="7" r="1.4" fill="none" stroke="#FFD700" stroke-width="0.5"/>
+                <rect width="20" height="14" fill="#FF0000" />
+                <rect width="8" height="14" fill="#006600" />
+                <circle cx="8" cy="7" r="2.8" fill="#FFD700" stroke="#FFD700" stroke-width="0.3" />
+                <circle cx="8" cy="7" r="2.2" fill="#003399" stroke="#FFD700" stroke-width="0.4" />
+                <circle cx="8" cy="7" r="1.4" fill="none" stroke="#FFD700" stroke-width="0.5" />
               </svg>
             } @else {
               <!-- USA flag -->
               <svg class="w-5 h-4 rounded-sm" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
-                <rect width="20" height="14" fill="#FFFFFF"/>
-                <rect width="20" height="1.08" y="0"    fill="#B22234"/>
-                <rect width="20" height="1.08" y="2.15" fill="#B22234"/>
-                <rect width="20" height="1.08" y="4.31" fill="#B22234"/>
-                <rect width="20" height="1.08" y="6.46" fill="#B22234"/>
-                <rect width="20" height="1.08" y="8.62" fill="#B22234"/>
-                <rect width="20" height="1.08" y="10.77" fill="#B22234"/>
-                <rect width="20" height="1.08" y="12.92" fill="#B22234"/>
-                <rect width="8"  height="7.54" fill="#3C3B6E"/>
+                <rect width="20" height="14" fill="#FFFFFF" />
+                <rect width="20" height="1.08" y="0" fill="#B22234" />
+                <rect width="20" height="1.08" y="2.15" fill="#B22234" />
+                <rect width="20" height="1.08" y="4.31" fill="#B22234" />
+                <rect width="20" height="1.08" y="6.46" fill="#B22234" />
+                <rect width="20" height="1.08" y="8.62" fill="#B22234" />
+                <rect width="20" height="1.08" y="10.77" fill="#B22234" />
+                <rect width="20" height="1.08" y="12.92" fill="#B22234" />
+                <rect width="8" height="7.54" fill="#3C3B6E" />
               </svg>
             }
           </button>
@@ -81,7 +82,7 @@
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                  [class]="theme.isDark() ? 'text-white' : 'text-black'">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
+                    d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
             </svg>
           </button>
 
@@ -92,8 +93,8 @@
                     hover:opacity-90 hover:scale-[1.03] transition-all duration-200 cursor-pointer">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd"
-                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
-                clip-rule="evenodd"/>
+                    d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
+                    clip-rule="evenodd" />
             </svg>
             {{ i18n.t().home.getStarted }}
           </a>
@@ -142,13 +143,13 @@
                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd"
-                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
-                clip-rule="evenodd"/>
+                    d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
+                    clip-rule="evenodd" />
             </svg>
             {{ i18n.t().home.heroGetStarted }}
             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
             </svg>
           </a>
           <a href="#how-it-works"
@@ -156,7 +157,7 @@
                     glass hover:text-text hover:bg-white/10 transition-all duration-200 cursor-pointer">
             {{ i18n.t().home.heroHowItWorks }}
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
           </a>
         </div>
@@ -205,7 +206,7 @@
                 <circle cx="60" cy="60" r="54"
                         fill="none"
                         stroke="rgba(124,58,237,0.12)"
-                        stroke-width="6"/>
+                        stroke-width="6" />
                 <circle cx="60" cy="60" r="54"
                         fill="none"
                         stroke="url(#heroGrad)"
@@ -213,11 +214,11 @@
                         stroke-linecap="round"
                         [attr.stroke-dasharray]="2 * 3.14159 * 54"
                         [attr.stroke-dashoffset]="ringOffset"
-                        style="transition: stroke-dashoffset 1s linear;"/>
+                        style="transition: stroke-dashoffset 1s linear;" />
                 <defs>
                   <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"   stop-color="#7c3aed"/>
-                    <stop offset="100%" stop-color="#06b6d4"/>
+                    <stop offset="0%" stop-color="#7c3aed" />
+                    <stop offset="100%" stop-color="#06b6d4" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -263,8 +264,8 @@
       <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-cyan/30
                   text-xs font-semibold text-cyan mb-4">
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/>
+          <circle cx="12" cy="12" r="10" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
         </svg>
         {{ i18n.t().home.pomoBadge }}
       </div>
@@ -286,11 +287,12 @@
       <div class="relative p-6 rounded-2xl glass border border-white/5 hover:border-purple/30
                   hover:glow-purple transition-all duration-300 cursor-default anim-fade-up stagger-1">
         <div class="absolute -top-3 -left-2 w-7 h-7 rounded-full bg-gradient-to-br from-purple to-cyan
-                    flex items-center justify-center text-white text-xs font-bold shadow-lg">1</div>
+                    flex items-center justify-center text-white text-xs font-bold shadow-lg">1
+        </div>
         <div class="w-11 h-11 rounded-xl bg-purple/10 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-purple-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
-              d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
+                  d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" />
           </svg>
         </div>
         <h3 class="font-['Space_Grotesk'] font-bold text-base text-text mb-2">{{ i18n.t().home.step1Title }}</h3>
@@ -301,11 +303,12 @@
       <div class="relative p-6 rounded-2xl glass border border-white/5 hover:border-purple/30
                   hover:glow-purple transition-all duration-300 cursor-default anim-fade-up stagger-2">
         <div class="absolute -top-3 -left-2 w-7 h-7 rounded-full bg-gradient-to-br from-purple to-cyan
-                    flex items-center justify-center text-white text-xs font-bold shadow-lg">2</div>
+                    flex items-center justify-center text-white text-xs font-bold shadow-lg">2
+        </div>
         <div class="w-11 h-11 rounded-xl bg-cyan/10 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/>
+            <circle cx="12" cy="12" r="10" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
           </svg>
         </div>
         <h3 class="font-['Space_Grotesk'] font-bold text-base text-text mb-2">{{ i18n.t().home.step2Title }}</h3>
@@ -316,11 +319,12 @@
       <div class="relative p-6 rounded-2xl glass border border-white/5 hover:border-emerald/30
                   transition-all duration-300 cursor-default anim-fade-up stagger-3">
         <div class="absolute -top-3 -left-2 w-7 h-7 rounded-full bg-gradient-to-br from-emerald to-cyan
-                    flex items-center justify-center text-white text-xs font-bold shadow-lg">3</div>
+                    flex items-center justify-center text-white text-xs font-bold shadow-lg">3
+        </div>
         <div class="w-11 h-11 rounded-xl bg-emerald/10 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
-              d="M12 3v2.25M6.75 12H4.5m15 0h-2.25M6.697 6.697 5.1 5.1m12.803 1.597 1.597-1.597M12 18.75V21m-4.773-4.227-1.591 1.591m11.159-1.591 1.591 1.591M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
+                  d="M12 3v2.25M6.75 12H4.5m15 0h-2.25M6.697 6.697 5.1 5.1m12.803 1.597 1.597-1.597M12 18.75V21m-4.773-4.227-1.591 1.591m11.159-1.591 1.591 1.591M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
           </svg>
         </div>
         <h3 class="font-['Space_Grotesk'] font-bold text-base text-text mb-2">{{ i18n.t().home.step3Title }}</h3>
@@ -331,11 +335,12 @@
       <div class="relative p-6 rounded-2xl glass border border-white/5 hover:border-amber/30
                   transition-all duration-300 cursor-default anim-fade-up stagger-4">
         <div class="absolute -top-3 -left-2 w-7 h-7 rounded-full bg-gradient-to-br from-amber to-rose
-                    flex items-center justify-center text-white text-xs font-bold shadow-lg">4</div>
+                    flex items-center justify-center text-white text-xs font-bold shadow-lg">4
+        </div>
         <div class="w-11 h-11 rounded-xl bg-amber/10 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
-              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
           </svg>
         </div>
         <h3 class="font-['Space_Grotesk'] font-bold text-base text-text mb-2">{{ i18n.t().home.step4Title }}</h3>
@@ -348,15 +353,15 @@
     <div class="hidden lg:flex items-center justify-center mt-8 gap-3 text-muted text-xs">
       <span class="px-3 py-1 rounded-full glass border border-white/5">{{ i18n.t().home.cycleTask }}</span>
       <svg class="w-4 h-4 text-purple-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
       </svg>
       <span class="px-3 py-1 rounded-full glass border border-white/5">{{ i18n.t().home.cycleWork }}</span>
       <svg class="w-4 h-4 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
       </svg>
       <span class="px-3 py-1 rounded-full glass border border-white/5">{{ i18n.t().home.cycleRest }}</span>
       <svg class="w-4 h-4 text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
       </svg>
       <span class="px-3 py-1 rounded-full glass border border-amber/30 text-amber">{{ i18n.t().home.cycleLong }}</span>
     </div>
@@ -372,7 +377,8 @@
       <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-amber/30
                   text-xs font-semibold text-amber mb-4">
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>
+          <path
+            d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
         </svg>
         {{ i18n.t().home.benefitsBadge }}
       </div>
@@ -416,7 +422,7 @@
           <div class="w-10 h-10 rounded-xl bg-purple/10 flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-purple-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+                    d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
             </svg>
           </div>
           <div>
@@ -432,7 +438,7 @@
           <div class="w-10 h-10 rounded-xl bg-cyan/10 flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
           </div>
           <div>
@@ -448,7 +454,7 @@
           <div class="w-10 h-10 rounded-xl bg-emerald/10 flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
             </svg>
           </div>
           <div>
@@ -464,7 +470,7 @@
           <div class="w-10 h-10 rounded-xl bg-amber/10 flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/>
+                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
             </svg>
           </div>
           <div>
@@ -480,7 +486,7 @@
           <div class="w-10 h-10 rounded-xl bg-rose/10 flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-rose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/>
+                    d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
             </svg>
           </div>
           <div>
@@ -496,7 +502,7 @@
           <div class="w-10 h-10 rounded-xl bg-purple/10 flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-purple-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 3.741-1.342m-7.482 0L7.34 8.01c.234-.96.697-1.83 1.348-2.535"/>
+                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 3.741-1.342m-7.482 0L7.34 8.01c.234-.96.697-1.83 1.348-2.535" />
             </svg>
           </div>
           <div>
@@ -519,8 +525,8 @@
                   text-xs font-semibold text-purple-lt mb-4">
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
           <path fill-rule="evenodd"
-            d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
-            clip-rule="evenodd"/>
+                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
+                clip-rule="evenodd" />
         </svg>
         {{ i18n.t().home.featuresBadge }}
       </div>
@@ -545,8 +551,8 @@
                       flex items-center justify-center shadow-lg shadow-purple/20
                       group-hover:scale-110 transition-transform duration-200">
             <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/>
+              <circle cx="12" cy="12" r="10" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
             </svg>
           </div>
           <div>
@@ -556,9 +562,12 @@
         </div>
         <p class="text-sm text-muted leading-relaxed">{{ i18n.t().home.f1Desc }}</p>
         <div class="flex flex-wrap gap-2 mt-4">
-          <span class="px-2.5 py-1 rounded-lg glass text-xs text-purple-lt border border-purple/20">{{ i18n.t().home.f1Tag1 }}</span>
-          <span class="px-2.5 py-1 rounded-lg glass text-xs text-cyan border border-cyan/20">{{ i18n.t().home.f1Tag2 }}</span>
-          <span class="px-2.5 py-1 rounded-lg glass text-xs text-emerald border border-emerald/20">{{ i18n.t().home.f1Tag3 }}</span>
+          <span
+            class="px-2.5 py-1 rounded-lg glass text-xs text-purple-lt border border-purple/20">{{ i18n.t().home.f1Tag1 }}</span>
+          <span
+            class="px-2.5 py-1 rounded-lg glass text-xs text-cyan border border-cyan/20">{{ i18n.t().home.f1Tag2 }}</span>
+          <span
+            class="px-2.5 py-1 rounded-lg glass text-xs text-emerald border border-emerald/20">{{ i18n.t().home.f1Tag3 }}</span>
         </div>
       </div>
 
@@ -571,7 +580,7 @@
                       group-hover:scale-110 transition-transform duration-200">
             <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4"/>
+                    d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4" />
             </svg>
           </div>
           <div>
@@ -589,6 +598,67 @@
                 style="background:rgba(16,185,129,0.1); color:#10b981; border:1px solid rgba(16,185,129,0.3)">{{ i18n.t().home.f2Tag3 }}</span>
         </div>
       </div>
+      <!-- Feature: Spotify Integration — NEW -->
+      <div class="p-7 rounded-2xl glass border border-white/5 hover:border-[#1DB954]/30
+                  transition-all duration-300 group anim-fade-up stagger-1">
+        <!-- "New" badge -->
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg
+                      group-hover:scale-110 transition-transform duration-200"
+               style="background: linear-gradient(135deg, #1DB954 0%, #158a3e 100%); box-shadow: 0 8px 24px rgba(29,185,84,0.25);">
+            <!-- Spotify icon -->
+            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2Zm4.586 14.424a.623.623 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 1 1-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 0 1 .207.857Zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 0 1-.966-.52.781.781 0 0 1 .52-.966c3.632-1.102 8.147-.568 11.226 1.324a.78.78 0 0 1 .257 1.071Zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.793c3.563-1.082 9.484-.872 13.22 1.35a.937.937 0 0 1-.86 1.6Z" />
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h3 class="font-['Space_Grotesk'] font-bold text-text">{{ i18n.t().home.f5Title }}</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide"
+                    style="background:rgba(29,185,84,0.15); color:#1DB954; border:1px solid rgba(29,185,84,0.4)">New</span>
+            </div>
+            <p class="text-xs text-muted">{{ i18n.t().home.f5Sub }}</p>
+          </div>
+        </div>
+        <p class="text-sm text-muted leading-relaxed">{{ i18n.t().home.f5Desc }}</p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="px-2.5 py-1 rounded-lg text-xs font-semibold"
+                style="background:rgba(29,185,84,0.1); color:#1DB954; border:1px solid rgba(29,185,84,0.3)">{{ i18n.t().home.f5Tag1 }}</span>
+          <span
+            class="px-2.5 py-1 rounded-lg glass text-xs text-muted border border-white/10">{{ i18n.t().home.f5Tag2 }}</span>
+        </div>
+      </div>
+
+      <!-- Feature: Quick Notes / Scratchpad — NEW -->
+      <div class="p-7 rounded-2xl glass border border-white/5 hover:border-amber/30
+                  transition-all duration-300 group anim-fade-up stagger-2">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber to-orange-500
+                      flex items-center justify-center shadow-lg shadow-amber/20
+                      group-hover:scale-110 transition-transform duration-200">
+            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <h3 class="font-['Space_Grotesk'] font-bold text-text">{{ i18n.t().home.f6Title }}</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide"
+                    style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.4)">New</span>
+            </div>
+            <p class="text-xs text-muted">{{ i18n.t().home.f6Sub }}</p>
+          </div>
+        </div>
+        <p class="text-sm text-muted leading-relaxed">{{ i18n.t().home.f6Desc }}</p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="px-2.5 py-1 rounded-lg text-xs font-semibold"
+                style="background:rgba(245,158,11,0.1); color:#f59e0b; border:1px solid rgba(245,158,11,0.3)">{{ i18n.t().home.f6Tag1 }}</span>
+          <span
+            class="px-2.5 py-1 rounded-lg glass text-xs text-muted border border-white/10">{{ i18n.t().home.f6Tag2 }}</span>
+        </div>
+      </div>
 
       <!-- Feature: Dark / Light Mode -->
       <div class="p-7 rounded-2xl glass border border-white/5 hover:border-amber/30
@@ -599,7 +669,7 @@
                       group-hover:scale-110 transition-transform duration-200">
             <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
+                    d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
             </svg>
           </div>
           <div>
@@ -619,7 +689,7 @@
                       group-hover:scale-110 transition-transform duration-200">
             <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253M3 12a8.954 8.954 0 0 0 .284 2.253"/>
+                    d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253M3 12a8.954 8.954 0 0 0 .284 2.253" />
             </svg>
           </div>
           <div>
@@ -629,6 +699,7 @@
         </div>
         <p class="text-sm text-muted leading-relaxed">{{ i18n.t().home.f4Desc }}</p>
       </div>
+
 
     </div>
   </section>
@@ -642,16 +713,18 @@
       <div class="absolute inset-0 bg-gradient-to-br from-purple/20 via-transparent to-cyan/20
                   glass border border-purple/20 rounded-3xl">
       </div>
-      <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-purple blur-3xl opacity-20" aria-hidden="true"></div>
-      <div class="absolute -bottom-12 -right-12 w-48 h-48 rounded-full bg-cyan blur-3xl opacity-15" aria-hidden="true"></div>
+      <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-purple blur-3xl opacity-20"
+           aria-hidden="true"></div>
+      <div class="absolute -bottom-12 -right-12 w-48 h-48 rounded-full bg-cyan blur-3xl opacity-15"
+           aria-hidden="true"></div>
 
       <div class="relative z-10">
         <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple to-cyan
                     flex items-center justify-center mx-auto mb-6 shadow-xl shadow-purple/30">
           <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd"
-              d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
-              clip-rule="evenodd"/>
+                  d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
+                  clip-rule="evenodd" />
           </svg>
         </div>
 
@@ -672,13 +745,13 @@
                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd"
-              d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
-              clip-rule="evenodd"/>
+                  d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
+                  clip-rule="evenodd" />
           </svg>
           {{ i18n.t().home.ctaBtn }}
           <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
           </svg>
         </a>
 
@@ -697,8 +770,8 @@
         <div class="w-5 h-5 rounded-lg bg-gradient-to-br from-purple to-cyan flex items-center justify-center">
           <svg class="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd"
-              d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
-              clip-rule="evenodd"/>
+                  d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.818a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .845-.143Z"
+                  clip-rule="evenodd" />
           </svg>
         </div>
         <span class="text-xs text-muted">FocusFlow — {{ i18n.t().home.footerTagline }}</span>

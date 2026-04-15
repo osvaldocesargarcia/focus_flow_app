@@ -79,6 +79,16 @@ export interface HomeTranslations {
   f4Title:               string;
   f4Sub:                 string;
   f4Desc:                string;
+  f5Title:               string;
+  f5Sub:                 string;
+  f5Desc:                string;
+  f5Tag1:                string;
+  f5Tag2:                string;
+  f6Title:               string;
+  f6Sub:                 string;
+  f6Desc:                string;
+  f6Tag1:                string;
+  f6Tag2:                string;
   // CTA section
   ctaHeadline:           string;
   ctaHeadlineGradient:   string;
@@ -222,6 +232,16 @@ const HOME_EN: HomeTranslations = {
   f4Title:               'Bilingual EN / PT',
   f4Sub:                 'English and Portuguese',
   f4Desc:                'Fully translated interface in English and Portuguese. Switch languages instantly without reloading. Preference is saved automatically.',
+  f5Title:               'Spotify Integration',
+  f5Sub:                 'Focus music inside your workspace',
+  f5Desc:                'Connect Spotify and control your music without ever leaving FocusFlow. Browse your playlists, skip tracks and keep the vibe going — all while your Pomodoro runs.',
+  f5Tag1:                'Spotify Connect',
+  f5Tag2:                'Focus playlists',
+  f6Title:               'Quick Notes',
+  f6Sub:                 'Capture thoughts without losing focus',
+  f6Desc:                'A lightweight scratchpad always within reach. Jot down distracting thoughts the moment they appear so they stop competing for your attention — then get straight back to work.',
+  f6Tag1:                'Instant capture',
+  f6Tag2:                'Auto-save',
   // CTA section
   ctaHeadline:           'Ready to transform',
   ctaHeadlineGradient:   'your productivity?',
@@ -310,6 +330,16 @@ const HOME_PT: HomeTranslations = {
   f4Title:               'Bilíngue EN / PT',
   f4Sub:                 'Inglês e Português',
   f4Desc:                'Interface completamente traduzida em inglês e português. Mude o idioma instantaneamente sem recarregar a página. A preferência é salva automaticamente.',
+  f5Title:               'Integração com Spotify',
+  f5Sub:                 'Música de foco no seu espaço de trabalho',
+  f5Desc:                'Conecte o Spotify e controle sua música sem sair do FocusFlow. Navegue nas playlists, pule faixas e mantenha o ritmo — tudo enquanto seu Pomodoro avança.',
+  f5Tag1:                'Spotify Connect',
+  f5Tag2:                'Playlists de foco',
+  f6Title:               'Notas Rápidas',
+  f6Sub:                 'Capture pensamentos sem perder o foco',
+  f6Desc:                'Um bloco de notas leve sempre à mão. Anote pensamentos distrativos no momento em que aparecem para que parem de competir pela sua atenção — e volte ao trabalho imediatamente.',
+  f6Tag1:                'Captura instantânea',
+  f6Tag2:                'Auto-save',
   // CTA section
   ctaHeadline:           'Pronto para transformar',
   ctaHeadlineGradient:   'sua produtividade?',
