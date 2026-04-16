@@ -138,6 +138,10 @@ export interface Translations {
   // Empty state
   noTasks:      string;
   noTasksHint:  string;
+  // Search
+  searchPlaceholder: string;
+  noResults:         string;
+  noResultsHint:     string;
   // Nav
   darkMode:     string;
   lightMode:    string;
@@ -384,6 +388,9 @@ const EN: Translations = {
   high:         'High',
   noTasks:      'No tasks yet',
   noTasksHint:  'Add a task and pair it with your focus session.',
+  searchPlaceholder: 'Search tasks…',
+  noResults:         'No tasks found',
+  noResultsHint:     'Try different keywords.',
   darkMode:     'Dark mode',
   lightMode:    'Light mode',
   musicPlayer:  'Focus Music',
@@ -429,6 +436,9 @@ const PT: Translations = {
   high:         'Alta',
   noTasks:      'Sem tarefas',
   noTasksHint:  'Adicione uma tarefa e combine com a sua sessão de foco.',
+  searchPlaceholder: 'Buscar tarefas…',
+  noResults:         'Nenhuma tarefa encontrada',
+  noResultsHint:     'Tente outras palavras-chave.',
   darkMode:     'Modo escuro',
   lightMode:    'Modo claro',
   musicPlayer:  'Música de Foco',
