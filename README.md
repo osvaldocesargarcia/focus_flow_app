@@ -1,39 +1,85 @@
 # FocusFlow
 
-A task management + Pomodoro focus timer app built as a frontend technical challenge.
+A task management + Pomodoro focus timer app built as a Frontend Developer technical challenge.
 
-## Overview
-
-FocusFlow combines a Kanban-style task board with a Pomodoro timer so you can manage what needs to get done and stay focused while doing it. Start a focus session directly from any task — the timer launches, the task moves to *in-progress*, and its name appears above the countdown ring so you always know what you're working on.
-
+> **Submission deadline:** April 17, 2025 — [github.com/osvaldocesargarcia/focus_flow_app](https://github.com/osvaldocesargarcia/focus_flow_app)
 
 ![IMG](doc/images/FocusFlow_visual_selection.png)
 
+---
+
+## Overview
+
+FocusFlow combines a full task management board with a Pomodoro timer so you can manage what needs to get done and stay focused while doing it. Start a focus session directly from any task — the timer launches, the task moves to *in-progress*, and its name appears above the countdown ring so you always know what you're working on.
+
+---
+
+## Mandatory Features Checklist
+
+| Requirement | Implementation |
+|---|---|
+| **Mobile-First** | Layout built mobile-first; bottom nav + slide-up panels on mobile, 3-column grid on desktop |
+| **CRUD** | Full create / edit / delete with title, description, priority and status |
+| **Filters** | Status filter tabs (All / To Do / In Progress / Done) + live search by title or description |
+| **Multilingual** | EN / PT toggle via a built-in `I18nService`; preference persisted to `localStorage` |
+| **Dark Mode** | CSS variable cascade with `.dark` class; theme persisted to `localStorage` |
+| **Persistence** | Tasks and scratchpad notes survive page refresh via `localStorage` |
+| **Angular 18+** | Built on Angular 21 with standalone components and Signals |
+| **Tailwind CSS** | Tailwind CSS v4 with `@tailwindcss/postcss` |
+
+---
+
 ## Features
 
-- **Task management** — Create, edit, and delete tasks with title, description, priority (high / medium / low), and status (todo / in-progress / done)
-- **Pomodoro timer** — Focus (25 min), short break (5 min), and long break (15 min) modes with an animated SVG progress ring
-- **Task → Timer link** — Play button on each task starts the Pomodoro immediately, sets that task as *in-progress*, and displays its name above the timer. Only one task can be in-progress at a time
+- **Task management** — Create, edit, and delete tasks with title, description, priority (high / medium / low) and status (todo / in-progress / done)
+- **Task search & filter** — Live search by title or description; filter by status via tab bar
+- **Pomodoro timer** — Focus (25 min), short break (5 min) and long break (15 min) modes with an animated SVG progress ring
+- **Task → Timer link** — Play button on any task starts the Pomodoro, sets that task as *in-progress*, and shows its name above the timer ring. Only one task can be active at a time
 - **Session tracking** — Dot indicators track completed focus sessions (4 per cycle)
-- **Scratchpad** — Quick inline notes panel for thoughts during a session
-- **Dark / light mode** — Toggles via a CSS variable cascade; dark-first design
-- **Bilingual UI** — English and Portuguese (PT) via a built-in i18n service
-- **Persistent state** — Tasks saved to `localStorage` across sessions
-- **Browser notifications** — Alerts when a focus or break session ends
+- **Spotify integration** — Embedded Spotify player for focus music; audio keeps playing even when the panel is closed on mobile
+- **Scratchpad** — Quick notes panel for capturing distracting thoughts mid-session
+- **Dark / light mode** — One-click toggle with CSS variable cascade; dark-first design
+- **Bilingual UI** — Full EN / PT translation via a custom `I18nService`
+- **Browser notifications** — Native alerts when a focus or break session ends
+- **Responsive layout** — Three-column desktop view (tasks | timer | music + notes); mobile view with sticky bottom navigation and slide-up panels
+
+---
+
+## Technical Decisions
+
+### Angular Signals (no NgRx, no RxJS)
+Signals (introduced in Angular 16, stable in 17+) are the current Angular-recommended primitive for reactive local state. They eliminate zone.js overhead, produce zero boilerplate compared to NgRx, and keep the data flow easy to follow. Every piece of shared state (`tasks`, `filter`, `timer mode`, `language`, `theme`) lives in a signal inside its corresponding service — components inject the service and read the signal directly in the template.
+
+### Standalone components
+Every component is standalone (`standalone: true`). No `NgModule` declarations, no barrel files needed just to wire up a module.
+
+### Tailwind CSS v4
+Tailwind v4 removes the `tailwind.config.js` file in favour of CSS-first configuration (`@theme` block in `styles.css`). Design tokens (colors, typography) live alongside the global styles — one source of truth, no JS config to maintain.
+
+### Custom i18n (no `@angular/localize`)
+`@angular/localize` is designed for build-time locale switching and compiled output per locale. For a runtime toggle between two languages a simple `computed<Translations>()` signal keyed on the active language is faster to build, zero dependency, and covers the requirement exactly.
+
+### `localStorage` for persistence
+No backend is in scope. `localStorage` is synchronous, universally available, and sufficient for task data at this scale. The `TaskService` hydrates on construction and writes on every mutation.
+
+---
 
 ## Stack
 
+| Layer | Choice | Reason |
+|---|---|---|
+| Framework | Angular 21 — standalone + Signals | Current best practice; zero-boilerplate reactivity |
+| Styling | Tailwind CSS v4 | CSS-first config; utility-first with design tokens |
+| Language | TypeScript (strict) | End-to-end type safety; `any` avoided throughout |
+| State | Angular Signals + `localStorage` | Lightweight, built-in, no extra dependencies |
+| i18n | Custom `I18nService` | Runtime toggle; two locales only — no build-time tool needed |
 
-| Layer     | Choice                                      |
-|-----------|---------------------------------------------|
-| Framework | Angular 21 (standalone components, signals) |
-| Styling   | Tailwind CSS v4 (`@tailwindcss/postcss`)    |
-| Language  | TypeScript (strict)                         |
-| State     | Angular signals + `localStorage`            |
+---
 
 ## Architecture
 
 ![IMG](doc/images/FocusFlow_architecture.png)
+
 ```
 src/app/
 ├── models/
@@ -41,19 +87,35 @@ src/app/
 ├── services/
 │   ├── task.service.ts        # CRUD, filters, localStorage persistence
 │   ├── timer.service.ts       # Pomodoro logic, active task tracking
-│   ├── i18n.service.ts        # EN / PT translations
-│   └── theme.service.ts       # Dark mode toggle
+│   ├── i18n.service.ts        # EN / PT translations, language signal
+│   └── theme.service.ts       # Dark / light mode toggle
 ├── components/
 │   ├── timer/                 # SVG ring timer + mode tabs + controls
-│   ├── task-list/             # Filter tabs, empty state, task grid
-│   ├── task-item/             # Task card with play/edit/delete actions
+│   ├── task-list/             # Filter tabs, search bar, task grid
+│   ├── task-item/             # Task card — play / edit / delete actions
 │   ├── task-form/             # Create / edit modal
 │   ├── scratchpad/            # Quick notes panel
-│   └── spotify-player/        # Embedded player widget
+│   └── spotify-player/        # Embedded Spotify widget
 └── pages/
     ├── home/                  # Landing / marketing page
-    └── app-page/              # Main two-column app layout
+    └── app-page/              # 3-column desktop layout + mobile bottom nav
 ```
+
+---
+
+## Design
+
+- **Visual style** — Glassmorphism: translucent cards with backdrop blur over a dark gradient base
+- **Color palette** — Purple (`#4278ff`) + Cyan (`#06b6d4`) accents; full light mode variant
+- **Typography** — Space Grotesk (headings) + Inter (body)
+- **Motion** — SVG ring progress with `cubic-bezier` easing; fade-up entry animations; pulse on active task; slide-up mobile panels
+- **Accessibility** — `aria-label`, `aria-pressed`, `aria-hidden` throughout; `:focus-visible` ring; reduced-motion media query respected
+
+![IMG](doc/images/screenshot1.png)
+![IMG](doc/images/screenshot3.png)
+![IMG](doc/images/screenshot4.png)
+
+---
 
 ## Getting started
 
@@ -67,19 +129,4 @@ ng serve
 
 # Production build
 ng build
-
-# Run tests
-ng test
 ```
-
-## Design notes
-
-- **Color palette** — Purple (`#7c3aed`) + Cyan (`#06b6d4`) accents on a dark base
-- **Typography** — Space Grotesk for headings, system sans for body
-- **Glassmorphism** — Cards use translucent backgrounds + backdrop blur
-- **Animations** — SVG ring progress with cubic-bezier easing, fade-up entry animations, ping pulse on active task button
-
-
-![IMG](doc/images/screenshot1.png)
-![IMG](doc/images/screenshot3.png)
-![IMG](doc/images/screenshot4.png)
