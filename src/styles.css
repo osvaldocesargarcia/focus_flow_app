@@ -222,6 +222,11 @@ html:not(.dark) .glow-purple {
   box-shadow: 0 0 40px rgba(124, 58, 237, 0.12);
 }
 
+/* ─── Mobile: task action buttons always visible (touch devices have no hover) ─── */
+@media (hover: none) {
+  .task-btn-always { opacity: 1 !important; }
+}
+
 /* ─── Scrollbar hide utility ─── */
 .scrollbar-none {
   scrollbar-width: none;

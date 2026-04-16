@@ -76,7 +76,7 @@
         @if (task().status !== 'done') {
           <button
             (click)="$event.stopPropagation(); onStartFocus()"
-            class="w-7 h-7 rounded-xl flex items-center justify-center
+            class="task-btn-always w-7 h-7 rounded-xl flex items-center justify-center
                    transition-all duration-150 cursor-pointer"
             [class]="isActiveTask()
               ? 'opacity-100 text-cyan bg-cyan/15 shadow-[0_0_10px_rgba(6,182,212,0.35)]'
@@ -99,7 +99,7 @@
 
         <!-- Edit + Delete: solo en hover/selected -->
         <div
-          class="flex gap-1 transition-opacity duration-150"
+          class="task-btn-always flex gap-1 transition-opacity duration-150"
           [class]="selected() ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'">
 
           <button
