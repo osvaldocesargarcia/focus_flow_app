@@ -205,89 +205,96 @@
 </div>
 
 <!-- ── Mobile Panel (backdrop + bottom sheet) ── -->
-@if (mobilePanel() !== null) {
 
-  <!-- Backdrop -->
+<!-- Backdrop: only when a panel is open -->
+@if (mobilePanel() !== null) {
   <div class="fixed inset-0 z-40 bg-black/55 backdrop-blur-[2px] lg:hidden anim-backdrop"
        (click)="closePanel()"
        aria-hidden="true">
   </div>
-
-  <!-- Bottom sheet -->
-  <div class="fixed inset-x-0 bottom-0 z-50 lg:hidden
-              flex flex-col rounded-t-3xl glass
-              border-t border-white/[0.09] shadow-2xl
-              max-h-[88dvh] anim-panel-up"
-       role="dialog"
-       [attr.aria-label]="panelTitle()">
-
-    <!-- Drag handle / tap-to-close -->
-    <div class="flex-shrink-0 flex justify-center pt-3 pb-1 cursor-pointer" (click)="closePanel()">
-      <div class="w-10 h-1 rounded-full bg-white/20"></div>
-    </div>
-
-    <!-- Panel header -->
-    <div class="flex-shrink-0 flex items-center justify-between px-5 pt-2 pb-3
-                border-b border-white/[0.06]">
-      <div class="flex items-center gap-2.5">
-
-        @if (mobilePanel() === 'tasks') {
-          <span class="w-7 h-7 flex items-center justify-center rounded-lg bg-purple/15 text-purple-lt">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
-              <rect x="9" y="3" width="6" height="4" rx="1"/>
-              <path d="m9 12 2 2 4-4"/>
-            </svg>
-          </span>
-        } @else if (mobilePanel() === 'music') {
-          <span class="w-7 h-7 flex items-center justify-center rounded-lg bg-purple/15 text-purple-lt">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 18V5l12-2v13"/>
-              <circle cx="6" cy="18" r="3"/>
-              <circle cx="18" cy="16" r="3"/>
-            </svg>
-          </span>
-        } @else {
-          <span class="w-7 h-7 flex items-center justify-center rounded-lg bg-purple/15 text-purple-lt">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"/>
-            </svg>
-          </span>
-        }
-
-        <h2 class="font-semibold text-sm text-text">{{ panelTitle() }}</h2>
-      </div>
-
-      <!-- Close button -->
-      <button (click)="closePanel()"
-              class="w-8 h-8 flex items-center justify-center rounded-xl
-                     text-muted hover:text-text glass hover:bg-white/10
-                     transition-all duration-200 cursor-pointer"
-              aria-label="Close panel">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 6 6 18M6 6l12 12"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Panel content (scrollable) -->
-    <div class="flex-1 overflow-y-auto p-4 pb-6">
-      @if (mobilePanel() === 'tasks') {
-        <app-task-list/>
-      } @else if (mobilePanel() === 'music') {
-        <app-spotify-player/>
-      } @else if (mobilePanel() === 'notes') {
-        <app-scratchpad/>
-      }
-    </div>
-
-  </div>
 }
+
+<!-- Bottom sheet: always in the DOM so the Spotify iframe is never destroyed.
+     Slides off-screen via translate-y-full when no panel is active. -->
+<div class="fixed inset-x-0 bottom-0 z-50 lg:hidden
+            flex flex-col rounded-t-3xl glass
+            border-t border-white/[0.09] shadow-2xl
+            max-h-[88dvh] transition-transform duration-300 ease-out"
+     [class.translate-y-full]="mobilePanel() === null"
+     role="dialog"
+     [attr.aria-hidden]="mobilePanel() === null"
+     [attr.aria-label]="panelTitle()">
+
+  <!-- Drag handle / tap-to-close -->
+  <div class="flex-shrink-0 flex justify-center pt-3 pb-1 cursor-pointer" (click)="closePanel()">
+    <div class="w-10 h-1 rounded-full bg-white/20"></div>
+  </div>
+
+  <!-- Panel header -->
+  <div class="flex-shrink-0 flex items-center justify-between px-5 pt-2 pb-3
+              border-b border-white/[0.06]">
+    <div class="flex items-center gap-2.5">
+
+      @if (mobilePanel() === 'tasks') {
+        <span class="w-7 h-7 flex items-center justify-center rounded-lg bg-purple/15 text-purple-lt">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+            <rect x="9" y="3" width="6" height="4" rx="1"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </span>
+      } @else if (mobilePanel() === 'music') {
+        <span class="w-7 h-7 flex items-center justify-center rounded-lg bg-purple/15 text-purple-lt">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+        </span>
+      } @else {
+        <span class="w-7 h-7 flex items-center justify-center rounded-lg bg-purple/15 text-purple-lt">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"/>
+          </svg>
+        </span>
+      }
+
+      <h2 class="font-semibold text-sm text-text">{{ panelTitle() }}</h2>
+    </div>
+
+    <!-- Close button -->
+    <button (click)="closePanel()"
+            class="w-8 h-8 flex items-center justify-center rounded-xl
+                   text-muted hover:text-text glass hover:bg-white/10
+                   transition-all duration-200 cursor-pointer"
+            aria-label="Close panel">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Panel content (scrollable) -->
+  <div class="flex-1 overflow-y-auto p-4 pb-6">
+    @if (mobilePanel() === 'tasks') {
+      <app-task-list/>
+    }
+    <!-- Spotify player: always rendered, never destroyed — audio survives panel close.
+         hidden (display:none) keeps the iframe alive but invisible. -->
+    <div [class.hidden]="mobilePanel() !== 'music'">
+      <app-spotify-player/>
+    </div>
+    @if (mobilePanel() === 'notes') {
+      <app-scratchpad/>
+    }
+  </div>
+
+</div>
 
 <!-- ── Task Form Modal (rendered at root to escape backdrop-filter stacking contexts) ── -->
 @if (taskService.showForm()) {
