@@ -1,13 +1,12 @@
-<div class="flex flex-col items-center gap-6 select-none">
+<div class="flex flex-col items-center select-none">
 
   <!-- ── Mode Tabs ── -->
-  <div class="flex gap-1 p-1 rounded-2xl"
-       [class]="'glass ' + (i18n.lang() === 'pt' ? 'text-xs' : 'text-sm')">
+  <div class="flex gap-1 p-1 rounded-2xl w-full glass text-sm">
     @for (tab of modeTabs(); track tab.key) {
       <button
         (click)="setMode(tab.key)"
         [class]="[
-          'px-3 py-1.5 rounded-xl font-medium transition-all duration-200 cursor-pointer whitespace-nowrap',
+          'flex-1 px-2 py-1.5 rounded-xl font-medium transition-all duration-200 cursor-pointer whitespace-nowrap text-center',
           timer.mode() === tab.key
             ? tab.key === 'focus'
               ? 'bg-purple text-white shadow-lg shadow-purple/30'
@@ -25,7 +24,7 @@
 
   <!-- ── Active Task Label ── -->
   @if (timer.activeTaskName()) {
-    <div class="flex items-center gap-2 px-3 py-1.5 rounded-2xl anim-fade-up"
+    <div class="flex items-center gap-2 px-3 py-1.5 rounded-2xl anim-fade-up mt-4"
          style="background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2);">
       <span class="w-1.5 h-1.5 rounded-full bg-cyan flex-shrink-0"
             [class]="timer.isRunning() ? 'animate-pulse' : ''"></span>
@@ -58,7 +57,7 @@
   }
 
   <!-- ── SVG Progress Ring ── -->
-  <div class="relative flex items-center justify-center">
+  <div class="relative flex items-center justify-center mt-10">
 
     <!-- Outer decorative ring glow -->
     <div
@@ -186,7 +185,7 @@
   </div>
 
   <!-- ── Controls ── -->
-  <div class="flex items-center gap-3">
+  <div class="flex items-center gap-3 mt-6">
 
     <!-- Reset -->
     <button
@@ -232,7 +231,7 @@
   </div>
 
   <!-- ── Session Dots ── -->
-  <div class="flex flex-col items-center gap-2">
+  <div class="flex flex-col items-center gap-2 mt-6">
     <div class="flex gap-2.5" [attr.aria-label]="i18n.t().sessions + ': ' + timer.sessions()">
       @for (filled of timer.sessionDots(); track $index) {
         <div
