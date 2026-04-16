@@ -2,7 +2,9 @@
 
 A task management + Pomodoro focus timer app built as a Frontend Developer technical challenge.
 
-> **Submission deadline:** April 17, 2025 — [github.com/osvaldocesargarcia/focus_flow_app](https://github.com/osvaldocesargarcia/focus_flow_app)
+> **GITHUB PAGES URL**  — [https://osvaldocesargarcia.github.io/focus_flow_app/#/](https://osvaldocesargarcia.github.io/focus_flow_app/#/)
+
+> GITHUB - [https://github.com/osvaldocesargarcia/focus_flow_app/tree/main](https://github.com/osvaldocesargarcia/focus_flow_app/tree/main)
 
 ![IMG](doc/images/FocusFlow_visual_selection.png)
 
