@@ -81,4 +81,5 @@ ng test
 
 
 ![IMG](doc/images/screenshot1.png)
-![IMG](doc/images/screenshot2.png)
+![IMG](doc/images/screenshot3.png)
+![IMG](doc/images/screenshot4.png)
