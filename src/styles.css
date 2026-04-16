@@ -112,6 +112,16 @@ body.light-mode {
   40%           { transform: scale(1);   opacity: 1; }
 }
 
+@keyframes slideUpPanel {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes fadeBackdrop {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* ─── Utility Classes ─── */
 
 /* Glassmorphism */
@@ -157,7 +167,9 @@ body.light-mode {
 .anim-fade-up   { animation: fadeInUp   0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .anim-slide-left { animation: slideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .anim-scale-in  { animation: scaleIn    0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.anim-slide-down { animation: slideDown  0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-slide-down  { animation: slideDown     0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-panel-up    { animation: slideUpPanel 0.38s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-backdrop    { animation: fadeBackdrop 0.22s ease both; }
 
 /* Timer ring glow when running */
 .ring-glow-focus { animation: glowPulse 2s ease-in-out infinite; }
