@@ -37,7 +37,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #090910;
   color: #f1f5f9;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 /* Light mode body overrides */
