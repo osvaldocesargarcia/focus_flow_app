@@ -11,6 +11,7 @@ type FilterKey = TaskStatus | 'all';
   standalone: true,
   imports: [TaskItemComponent],
   templateUrl: './task-list.html',
+  host: { class: 'h-full flex flex-col' },
 })
 export class TaskListComponent {
   readonly taskService = inject(TaskService);
