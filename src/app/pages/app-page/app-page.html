@@ -24,7 +24,7 @@
 
   <!-- ══ Header / Navbar ══ -->
   <header class="sticky top-0 z-40 w-full">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-4">
       <div class="flex items-center justify-between h-12 px-4 sm:px-5 rounded-2xl glass shadow-lg">
 
         <!-- Logo (links back to Home) -->
@@ -97,27 +97,31 @@
   </header>
 
   <!-- ══ Main content ══ -->
-  <main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+  <main class="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
 
-    <div class="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-6 lg:gap-8 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_460px_440px] gap-6 items-stretch">
 
-      <!-- ── Left: Timer card + Music player ── -->
-      <div class="lg:sticky lg:top-28 flex flex-col gap-4">
-        <div class="p-6 sm:p-8 rounded-3xl glass shadow-xl glow-purple anim-fade-up">
+      <!-- ── Col 1 (desktop): Task list ── -->
+      <div class="hidden lg:flex flex-col min-h-[640px] anim-fade-up" style="animation-delay: 0.05s;">
+        <div class="flex-1 p-5 rounded-3xl glass shadow-xl">
+          <app-task-list/>
+        </div>
+      </div>
+
+      <!-- ── Col 2: Timer (visible siempre) ── -->
+      <div class="flex flex-col anim-fade-up">
+        <div class="flex-1 p-6 sm:p-8 rounded-3xl glass shadow-xl glow-purple flex flex-col justify-center">
           <p class="text-xs font-medium text-muted uppercase tracking-widest mb-6 text-center">
             Pomodoro
           </p>
           <app-timer/>
         </div>
-        <app-spotify-player class="hidden lg:block anim-fade-up" style="animation-delay: 0.15s;"/>
-        <app-scratchpad class="hidden lg:block anim-fade-up" style="animation-delay: 0.2s;"/>
       </div>
 
-      <!-- ── Right: Task list (desktop only) ── -->
-      <div class="hidden lg:block min-h-[480px] anim-fade-up" style="animation-delay: 0.1s;">
-        <div class="h-full p-5 sm:p-6 rounded-3xl glass shadow-xl">
-          <app-task-list/>
-        </div>
+      <!-- ── Col 3 (desktop): Spotify + Notes ── -->
+      <div class="hidden lg:flex flex-col gap-4">
+        <app-spotify-player class="anim-fade-up flex-shrink-0" style="animation-delay: 0.15s;"/>
+        <app-scratchpad class="anim-fade-up flex-1 min-h-0 flex flex-col" style="animation-delay: 0.2s;"/>
       </div>
 
     </div>
@@ -182,7 +186,7 @@
   </nav>
 
   <!-- ══ Footer ══ -->
-  <footer class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-center gap-3">
+  <footer class="w-full max-w-[1440px] mx-auto px-4 sm:px-6 py-5 flex items-center justify-center gap-3">
     <p class="text-xs text-muted/50">
       FocusFlow &mdash; {{ i18n.t().appTagline }}
     </p>

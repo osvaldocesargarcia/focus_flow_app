@@ -11,18 +11,13 @@ const STORAGE_KEY = 'ff:scratchpad';
   templateUrl: './scratchpad.html',
 })
 export class ScratchpadComponent {
-  readonly i18n   = inject(I18nService);
-  readonly isOpen = signal(false);
-  readonly notes  = signal<string>(localStorage.getItem(STORAGE_KEY) ?? '');
+  readonly i18n  = inject(I18nService);
+  readonly notes = signal<string>(localStorage.getItem(STORAGE_KEY) ?? '');
 
   constructor() {
     effect(() => {
       localStorage.setItem(STORAGE_KEY, this.notes());
     });
-  }
-
-  toggle(): void {
-    this.isOpen.update(v => !v);
   }
 
   clear(): void {
